@@ -12,29 +12,29 @@ class NavigationModel extends DModel {
 
   static const NavigationModel starter = NavigationModel(
     id: 'get-started',
-    name: 'Home',
+    name: 'Начало работы',
     activeIcon: 'assets/image/icon_active_home.svg',
     inactiveIcon: 'assets/image/icon_inactive_home.svg',
   );
 
   static const NavigationModel features = NavigationModel(
     id: 'features',
-    name: 'Features',
+    name: 'Ключевые функции',
     activeIcon: 'assets/image/icon_active_features.svg',
     inactiveIcon: 'assets/image/icon_inactive_features.svg',
   );
 
   static const NavigationModel pricing = NavigationModel(
     id: 'pricing',
-    name: 'Pricing',
+    name: 'Стоимость',
     activeIcon: 'assets/image/icon_active_pricing.svg',
     inactiveIcon: 'assets/image/icon_inactive_pricing.svg',
   );
 
-  static const NavigationModel faq = NavigationModel(
-    id: 'faq',
-    name: 'FAQ',
-    activeIcon: 'assets/image/icon_active_faq.svg',
-    inactiveIcon: 'assets/image/icon_inactive_faq.svg',
-  );
+  // static const NavigationModel faq = NavigationModel(
+  //   id: 'faq',
+  //   name: 'FAQ',
+  //   activeIcon: 'assets/image/icon_active_faq.svg',
+  //   inactiveIcon: 'assets/image/icon_inactive_faq.svg',
+  // );
 }

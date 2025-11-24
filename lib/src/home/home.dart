@@ -6,8 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:scroll_to_id/scroll_to_id.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:seo/seo.dart';
-import 'package:url_launcher/url_launcher.dart';
-
+import 'dart:html' as html;
 part 'pages/home_page.dart';
 part 'pages/home_faq_section.dart';
 part 'pages/home_features_section.dart';

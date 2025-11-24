@@ -87,86 +87,100 @@ class HomePage extends StatelessWidget {
           // HomeStarter Section: Introduction
           HomeStarter(
             id: item.id,
-            title: "Explore Key Features or Benefits",
+            title: "Программное обеспечение для паспортистов. Документы оформляются сами — вы только управляете процессом!",
             subtitle:
-                "We've Solved Problem with Your Solution - Making Your Life Easier. Get Ready for Our Upcoming Launch - Something Amazing Awaits. Stay Informed.",
+                "Программа для быстрого и удобного оформления регистрации и убытия по месту жительства и временного прибывния",
           ),
+
 
           // HomeFeatures Section: Key Features
           HomeFeatures(
             id: item.id,
-            title: 'Key Features',
+            title: 'Ключевые функции',
             subtitle:
-                'Explore Why Our Product is the Ideal Solution for Your Needs',
+                'Узнайте, почему наш продукт — идеальное решение для ваших нужд',
             cards: const [
               CardModel(
                 source: 'assets/image/icon_inactive_faq.svg',
-                title: "Discover the World's Wonders",
+                title: "📂 База данных граждан",
                 subtitle:
-                    'Embark on a mesmerizing journey to breathtaking destinations and uncover the hidden gems that make our planet truly extraordinary. 🚀',
+                    'Создавайте и храните полные профили граждан.\n'
+                        'Удобный поиск и фильтрация по ключевым параметрам.\n'
+                        'Надёжное хранение данных с акцентом на безопасность.🚀'
+                        '',
               ),
               CardModel(
                 source: 'assets/image/icon_inactive_features.svg',
-                title: 'Unleash Your Creativity',
+                title: '📝 Генерация пакета документов',
                 subtitle:
-                    'Ignite your creative spark and let your imagination run wild with our vast collection of inspiring content, designed to fuel your artistic passions. 🎨',
+                    'Автоматическое формирование всех необходимых форм:\n'
+                        '- Регистрация по месту жительства\n'
+                        '- Регистрация временного пребывания\n'
+                        '- Убытие с места пребывания\n'
+                        '- Убытие с места жительства 🎨'
+                ,
               ),
               CardModel(
                 source: 'assets/image/icon_inactive_pricing.svg',
-                title: 'Elevate Your Taste Buds',
+                title: '⚡ Экономия времени и сил',
                 subtitle:
-                    'Indulge in a delectable culinary journey that tantalizes your palate, as we guide you through a world of flavors and culinary adventures. 🍰',
+                    'Сокращение времени оформления в несколько раз.\n'
+                        'Минимизация ошибок за счёт автоматизации.\n'
+                        'Простая работа даже для начинающих пользователей.\n'
+                        '👉 «Программа, которая работает так же надёжно, как и вы!» 🍰',
               ),
               CardModel(
                 source: 'assets/image/icon_inactive_faq.svg',
-                title: 'Master Your Fitness Journey',
+                title: '🖥️ Оптимизация для Windows',
                 subtitle:
-                    'Take control of your health and wellness goals with our expert guidance, tailored workouts, and nutrition tips to help you achieve the best version of yourself. 🏸',
+                    'Полная совместимость с Windows-системами.\n'
+                        'Лёгкая установка и обновления.\n'
+                        'Дружелюбный интерфейс для ежедневной работы. 🏸\n'
+                        '👉 «Ваш незаменимый помощник в документообороте!»',
               ),
               CardModel(
                 source: 'assets/image/icon_inactive_features.svg',
-                title: 'Unlock Adventure Awaits',
+                title: '🎯 Преимущества для пользователей',
                 subtitle:
-                    'Embark on thrilling adventures and create unforgettable moments as we guide you through an exciting world of experiences, from adrenaline-pumping escapades to serene getaways. 🏔',
+                    'Скорость — оформление документов за минуты.\n'
+                        'Удобство — всё в одном месте, без лишних файлов.\n'
+                        'Профессионализм — программа создана специально для специалистов.🏔\n'
+
               ),
-              CardModel(
-                source: 'assets/image/icon_inactive_pricing.svg',
-                title: 'Stay Informed and Inspired',
-                subtitle:
-                    'Get the latest news, insights, and motivation from our team of experts and thought leaders. Stay informed, stay inspired, and stay ahead of the curve. 🗞',
-              ),
+
             ],
           ),
 
           // HomePricing Section: Pricing Plans
           HomePricing(
             id: item.id,
-            title: 'Choose the Perfect Plan',
+            title: 'Стоимость пользования нашим продуктом',
             subtitle:
-                'Explore the benefits and features of each plan to make the right choice for your business.',
+                'Прозрачные условия — максимум возможностей',
             plans: const [
               // HomePricingModel items representing pricing plans
               HomePricingModel(
-                title: 'Basic Plan',
-                price: 0,
+                title: 'Базовый план',
+                price: 35,
                 benefits:
-                    "Affordable pricing for individuals and small businesses.\nEssential features to get started quickly.\n24/7 customer support for any assistance you need.",
-                type: HomePricingType.forever,
-              ),
-              HomePricingModel(
-                title: 'Pro Plan',
-                price: 15,
-                benefits:
-                    "Ideal for growing businesses looking for advanced features.\nEnhanced performance and scalability.\nPriority support and access to premium resources.",
+                    "Поддержка 24/7 — всегда на связи, чтобы помочь вам в любой ситуации.\n"
+                        "Регулярные обновления — новые функции и улучшения без лишних хлопот.",
                 type: HomePricingType.month,
               ),
-              HomePricingModel(
-                title: 'Premium Plan',
-                price: 120,
-                benefits:
-                    "Experience the ultimate package with exclusive features.\nAdvanced tools and customizations for your business.\nDedicated account manager for personalized assistance.",
-                type: HomePricingType.year,
-              ),
+              // HomePricingModel(
+              //   title: 'Pro Plan',
+              //   price: 15,
+              //   benefits:
+              //       "Ideal for growing businesses looking for advanced features.\nEnhanced performance and scalability.\nPriority support and access to premium resources.",
+              //   type: HomePricingType.month,
+              // ),
+              // HomePricingModel(
+              //   title: 'Premium Plan',
+              //   price: 120,
+              //   benefits:
+              //       "Experience the ultimate package with exclusive features.\nAdvanced tools and customizations for your business.\nDedicated account manager for personalized assistance.",
+              //   type: HomePricingType.year,
+              // ),
             ],
           ),
 

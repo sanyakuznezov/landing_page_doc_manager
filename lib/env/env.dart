@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_landing_page/src/home/home.dart';
+import 'package:flutter_landing_page/src/home/pages/order_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meta_seo/meta_seo.dart';
 import 'package:scroll_to_id/scroll_to_id.dart';
@@ -25,7 +26,7 @@ part 'widgets/error.dart';
 
 class Env {
   static GoRouter routes = GoRouter(
-    routes: [Routes.home],
+    routes: [Routes.home,Routes.order],
     initialLocation: Routes.home.path,
     errorBuilder: Routes.error.builder,
   );
@@ -34,7 +35,7 @@ class Env {
     NavigationModel.starter,
     NavigationModel.features,
     NavigationModel.pricing,
-    NavigationModel.faq
+    //NavigationModel.faq
   ];
 
   static NavigationController controller = NavigationController(

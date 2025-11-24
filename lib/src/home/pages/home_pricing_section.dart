@@ -125,7 +125,9 @@ class HomePricing extends StatelessWidget {
                     child: Text(
                       '\n$subtitle',
                       semanticsLabel: subtitle,
-                      style: context.text.bodySmall,
+                      style: context.text.bodySmall!.copyWith(
+                        fontSize: 20
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -200,8 +202,8 @@ class HomePricing extends StatelessWidget {
                             text: '\$',
                             style: TextTagStyle.h4,
                             child: Text(
-                              '\$',
-                              semanticsLabel: 'USD',
+                              'BYR',
+                              semanticsLabel: 'BYR',
                               style: context.text.bodyMedium?.copyWith(
                                 color: context.color.onBackground,
                                 fontSize: 20.0,
@@ -230,7 +232,7 @@ class HomePricing extends StatelessWidget {
                             text: item.type.name,
                             style: TextTagStyle.h4,
                             child: Text(
-                              "/${item.type.name}",
+                              "/${item.type.label}",
                               semanticsLabel: item.type.name.toString(),
                               style: context.text.bodyMedium?.copyWith(
                                 color:
@@ -310,9 +312,9 @@ class HomePricing extends StatelessWidget {
                       anchor: 'Upgrade',
                       href: '/dashboard',
                       child: DButton.text(
-                        onTap: () => context.go('/dashboard'),
+                        onTap: () => context.go('/order'),
                         color: context.color.primary,
-                        text: 'Upgrade',
+                        text: 'Оформить',
                         style: context.text.bodyMedium?.copyWith(
                           color: context.color.background,
                         ),

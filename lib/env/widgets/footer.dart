@@ -29,55 +29,55 @@ class NavigationFooter extends StatelessWidget {
                 alignment: WrapAlignment.center,
                 children: [
                   // Term of Service Button
-                  Semantics(
-                    label: 'Unidentified Route',
-                    link: true,
-                    child: Seo.link(
-                      anchor: 'Term of Service',
-                      href: '/term_of_service.txt',
-                      child: DButton.text(
-                        onTap: () => context.go('/term_of_service.txt'),
-                        text: 'Term of Service',
-                        style: context.text.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: context.color.primary,
-                        ),
-                        color: Colors.transparent,
-                      ),
-                    ),
-                  ),
+                  // Semantics(
+                  //   label: 'Unidentified Route',
+                  //   link: true,
+                  //   child: Seo.link(
+                  //     anchor: 'Term of Service',
+                  //     href: '/term_of_service.txt',
+                  //     child: DButton.text(
+                  //       onTap: () => context.go('/term_of_service.txt'),
+                  //       text: 'Term of Service',
+                  //       style: context.text.bodyMedium?.copyWith(
+                  //         fontWeight: FontWeight.bold,
+                  //         color: context.color.primary,
+                  //       ),
+                  //       color: Colors.transparent,
+                  //     ),
+                  //   ),
+                  // ),
 
                   // Privacy Pplicy Button
-                  Semantics(
-                    label: 'Sponsor Us',
-                    link: true,
-                    child: Seo.link(
-                      anchor: 'Privacy Policy',
-                      href: 'https://www.buymeacoffee.com/nialixus',
-                      child: DButton.text(
-                        onTap: () => launchUrl(
-                            Uri.parse('https://www.buymeacoffee.com/nialixus')),
-                        text: 'Privacy Policy',
-                        style: context.text.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: context.color.primary,
-                        ),
-                        color: Colors.transparent,
-                      ),
-                    ),
-                  ),
+                  // Semantics(
+                  //   label: 'Sponsor Us',
+                  //   link: true,
+                  //   child: Seo.link(
+                  //     anchor: 'Privacy Policy',
+                  //     href: 'https://www.buymeacoffee.com/nialixus',
+                  //     child: DButton.text(
+                  //       onTap: () => launchUrl(
+                  //           Uri.parse('https://www.buymeacoffee.com/nialixus')),
+                  //       text: 'Privacy Policy',
+                  //       style: context.text.bodyMedium?.copyWith(
+                  //         fontWeight: FontWeight.bold,
+                  //         color: context.color.primary,
+                  //       ),
+                  //       color: Colors.transparent,
+                  //     ),
+                  //   ),
+                  // ),
 
                   // Contact Us Button
                   Semantics(
                     label: 'Author Email',
                     link: true,
                     child: Seo.link(
-                      anchor: 'Contact Us',
-                      href: 'mailto://nialixus@gmail.com',
+                      anchor: 'Связаться с нами',
+                      href: 'mailto:kuzniatsou.dev@gmail.com',
                       child: DButton.text(
                         onTap: () =>
-                            launchUrl(Uri.parse('mailto://nialixus@gmail.com')),
-                        text: 'Contact Us',
+                            launchUrl(Uri.parse('mailto:kuzniatsou.dev@gmail.com')),
+                        text: 'Связаться с нами',
                         style: context.text.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: context.color.primary,
@@ -87,41 +87,21 @@ class NavigationFooter extends StatelessWidget {
                     ),
                   ),
 
-                  // Blog Button
-                  Semantics(
-                    label: 'Github Repository',
-                    link: true,
-                    child: Seo.link(
-                      anchor: 'Blog',
-                      href: 'https://github.com/Nialixus/flutter_landing_page',
-                      child: DButton.text(
-                        onTap: () => launchUrl(
-                          Uri.parse('https://github.com/'
-                              'Nialixus/flutter_landing_page'),
-                        ),
-                        text: 'Blog',
-                        style: context.text.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: context.color.primary,
-                        ),
-                        color: Colors.transparent,
-                      ),
-                    ),
-                  ),
+
                 ],
               ),
             ),
 
             // Copyright text
             Semantics(
-              label: 'Copyright 2023 Louis Wiwawan',
+              label: 'Copyright 2025 Александр Кузнецов',
               child: Seo.link(
-                anchor: '© 2023 Louis Wiwawan',
+                anchor: '© 2025 Александр Кузнецов',
                 href: 'https://github.com/Nialixus/'
                     'flutter_landing_page/blob/main/LICENSE',
                 child: DButton.text(
                   mainAxisSize: MainAxisSize.min,
-                  text: "© 2023 Louis Wiwawan",
+                  text: "© 2025 Александр Кузнецов",
                   style: context.text.bodyMedium?.copyWith(
                     color: context.color.background.withOpacity(0.25),
                     fontWeight: FontWeight.w400,

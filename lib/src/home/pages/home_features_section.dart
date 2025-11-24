@@ -171,7 +171,9 @@ class HomeFeatures extends StatelessWidget {
                     child: Text(
                       '\n$subtitle',
                       semanticsLabel: subtitle,
-                      style: context.text.bodySmall,
+                      style: context.text.bodySmall!.copyWith(
+                        fontSize: 20
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),

@@ -1,5 +1,6 @@
 part of '../home.dart';
 
+
 class HomeStarter extends StatelessWidget {
   const HomeStarter({
     super.key,
@@ -8,6 +9,19 @@ class HomeStarter extends StatelessWidget {
     required this.subtitle,
   });
   final String id, title, subtitle;
+
+
+
+  /// Метод для скачивания файла по ссылке в Flutter Web
+ static void _downloadFile(String url, {String? fileName}) {
+    final anchor = html.AnchorElement(href: url)
+      ..download = fileName ?? url.split('/').last
+      ..style.display = 'none';
+
+    html.document.body?.append(anchor);
+    anchor.click();
+    anchor.remove();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -141,87 +155,133 @@ class HomeStarter extends StatelessWidget {
               child: Text(
                 '\n$subtitle',
                 semanticsLabel: subtitle,
-                style: context.text.bodySmall,
+                style: context.text.bodyMedium?.copyWith(
+                  fontSize: 20
+                ),
                 textAlign: TextAlign.justify,
               ),
             ),
           ],
         ),
       ),
-      Padding(
-        padding: const EdgeInsets.all(Constants.spacing),
-        child: Wrap(
-          runSpacing: Constants.spacing * 0.5,
-          spacing: Constants.spacing * 0.5,
-          runAlignment: WrapAlignment.center,
-          alignment: WrapAlignment.center,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          verticalDirection: VerticalDirection.down,
+      const SizedBox(height: Constants.spacing+20),
+      Container(
+        padding: const EdgeInsets.only(left: 20),
+        decoration: BoxDecoration(
+          color: context.color.onBackground.withOpacity(0.5),
+          borderRadius: BorderRadius.circular(Constants.spacing * 0.5),
+        ),
+        child: Row(
+          mainAxisAlignment: .start,
+          spacing: 20,
+          mainAxisSize: .min,
           children: [
-            // Display email input area
-            Semantics(
-              label: 'Enter Your Email Address to Join the Waitlist',
-              textField: true,
-              child: ExcludeSemantics(
-                excluding: true,
-                child: DTextArea(
-                  isDense: false,
-                  textAlign: TextAlign.start,
-                  cursorColor: context.color.background,
-                  borderRadius: BorderRadius.circular(Constants.spacing * 0.5),
-                  borderSideIdle: BorderSide.none,
-                  backgroundColor: context.color.onBackground.withOpacity(0.5),
-                  hintText: 'Enter Your Email Adress              ',
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: Constants.spacing,
-                  ),
-                  textStyle: context.text.bodySmall?.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: context.color.surface,
-                  ),
-                  hintStyle: context.text.bodySmall?.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: context.color.surface.withOpacity(0.5),
-                  ),
-                  borderSideActive: BorderSide(
-                    color: context.color.background.withOpacity(0.75),
-                  ),
-                  placeholder: DButton.text(
-                    text:
-                        'Enter Your Email Adress                        | Join Waitlist',
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Constants.spacing,
-                      vertical: Constants.spacing * 0.75,
-                    ),
-                    style: context.text.bodySmall
-                        ?.copyWith(fontWeight: FontWeight.w500),
-                    onTap: () {},
-                  ),
-
-                  // Display "Join Waitlist" button
-                  suffixIcon: DButton.text(
-                    onTap: () => context.go('/dashboard'),
-                    text: 'Join Waitlist',
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: Constants.spacing,
-                      vertical: Constants.spacing * 0.7,
-                    ),
-                    style: context.text.bodyMedium?.copyWith(
-                      color: context.color.primary,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12.0,
-                    ),
-                    borderRadius:
-                        BorderRadius.circular(Constants.spacing * 0.25),
-                  ),
+            Seo.text(
+              text: subtitle,
+              style: TextTagStyle.p,
+              child: Text(
+                'Последняя версия для Windows',
+                semanticsLabel: subtitle,
+                style: context.text.bodyMedium?.copyWith(
+                    fontSize: 18
                 ),
+                textAlign: TextAlign.justify,
               ),
+            ),
+            DButton.text(
+              onTap: () => _downloadFile('https://document-manager-865ad.firebaseapp.com/updates/com.cdm-win-Setup.exe'),
+              text: 'СКАЧАТЬ',
+              padding: const EdgeInsets.symmetric(
+                horizontal: Constants.spacing,
+                vertical: Constants.spacing * 0.7,
+              ),
+              style: context.text.bodyMedium?.copyWith(
+                color: context.color.primary,
+                fontWeight: FontWeight.bold,
+                fontSize: 12.0,
+              ),
+              borderRadius:
+              BorderRadius.circular(Constants.spacing * 0.25),
             ),
           ],
         ),
       ),
+      // Padding(
+      //   padding: const EdgeInsets.all(Constants.spacing),
+      //   child: Wrap(
+      //     runSpacing: Constants.spacing * 0.5,
+      //     spacing: Constants.spacing * 0.5,
+      //     runAlignment: WrapAlignment.center,
+      //     alignment: WrapAlignment.center,
+      //     crossAxisAlignment: WrapCrossAlignment.center,
+      //     verticalDirection: VerticalDirection.down,
+      //     children: [
+      //       // Display email input area
+      //       Semantics(
+      //         label: 'Enter Your Email Address to Join the Waitlist',
+      //         textField: true,
+      //         child: ExcludeSemantics(
+      //           excluding: true,
+      //           child: DTextArea(
+      //             isDense: false,
+      //             textAlign: TextAlign.start,
+      //             cursorColor: context.color.background,
+      //             borderRadius: BorderRadius.circular(Constants.spacing * 0.5),
+      //             borderSideIdle: BorderSide.none,
+      //             backgroundColor: context.color.onBackground.withOpacity(0.5),
+      //             hintText: 'Enter Your Email Adress              ',
+      //             contentPadding: const EdgeInsets.symmetric(
+      //               horizontal: Constants.spacing,
+      //             ),
+      //             textStyle: context.text.bodySmall?.copyWith(
+      //               fontWeight: FontWeight.w500,
+      //               color: context.color.surface,
+      //             ),
+      //             hintStyle: context.text.bodySmall?.copyWith(
+      //               fontWeight: FontWeight.w500,
+      //               color: context.color.surface.withOpacity(0.5),
+      //             ),
+      //             borderSideActive: BorderSide(
+      //               color: context.color.background.withOpacity(0.75),
+      //             ),
+      //             placeholder: DButton.text(
+      //               text:
+      //                   'Enter Your Email Adress                        | Join Waitlist',
+      //               padding: const EdgeInsets.symmetric(
+      //                 horizontal: Constants.spacing,
+      //                 vertical: Constants.spacing * 0.75,
+      //               ),
+      //               style: context.text.bodySmall
+      //                   ?.copyWith(fontWeight: FontWeight.w500),
+      //               onTap: () {},
+      //             ),
+      //
+      //             // Display "Join Waitlist" button
+      //             suffixIcon: DButton.text(
+      //               onTap: () => context.go('/dashboard'),
+      //               text: 'Join Waitlist',
+      //               padding: const EdgeInsets.symmetric(
+      //                 horizontal: Constants.spacing,
+      //                 vertical: Constants.spacing * 0.7,
+      //               ),
+      //               style: context.text.bodyMedium?.copyWith(
+      //                 color: context.color.primary,
+      //                 fontWeight: FontWeight.bold,
+      //                 fontSize: 12.0,
+      //               ),
+      //               borderRadius:
+      //                   BorderRadius.circular(Constants.spacing * 0.25),
+      //             ),
+      //           ),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     ];
   }
+
+
 
   static Widget thumbnail() {
     return Animate(

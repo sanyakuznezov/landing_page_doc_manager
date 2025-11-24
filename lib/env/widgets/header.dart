@@ -104,9 +104,9 @@ class NavigationHeader extends AppBar {
                   link: true,
                   child: Seo.link(
                     anchor: 'Get Started',
-                    href: '/dashboard',
+                    href: '/order',
                     child: DButton.text(
-                      text: 'Get Started',
+                      text: 'Подать заявку',
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16.0, vertical: 8.0),
                       borderRadius: BorderRadius.circular(20.0),
@@ -114,7 +114,7 @@ class NavigationHeader extends AppBar {
                         color: context.color.primary,
                         fontWeight: FontWeight.w600,
                       ),
-                      onTap: () => context.go('/dashboard'),
+                      onTap: () => context.go('/order'),
                     ),
                   ),
                 ),
@@ -127,11 +127,11 @@ class NavigationHeader extends AppBar {
   static Widget logo() {
     return Builder(builder: (context) {
       return Seo.text(
-        text: '🎉  FLUTTER',
+        text: 'ПаспортистSmart',
         style: TextTagStyle.h1,
         child: Text(
           // Your logo
-          '🎉  FLUTTER', semanticsLabel: 'Flutter Landing Page Logo',
+          'ПаспортистSmart', semanticsLabel: 'Flutter Landing Page Logo',
           style: context.text.titleLarge?.copyWith(
             color: context.color.background,
             fontWeight: FontWeight.w900,
