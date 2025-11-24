@@ -34,7 +34,7 @@ class HomeStarter extends StatelessWidget {
           if (context.isDesktop) {
             // For desktop layout
             return Padding(
-              padding: const EdgeInsets.all(Constants.spacing),
+              padding: const EdgeInsets.all(Constants.spacing+100),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.stretch,

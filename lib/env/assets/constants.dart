@@ -1,5 +1,6 @@
 part of '../env.dart';
 
+
 class Constants {
   static const Curve curve = Curves.easeInOut;
   static const Duration duration = Duration(milliseconds: 300);

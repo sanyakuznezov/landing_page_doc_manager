@@ -16,11 +16,13 @@ class OrderScreen extends StatefulWidget {
 class _OrderScreenState extends State<OrderScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
+  bool _isSuccess = false;
 
   // Контроллеры для всех полей
   final fullNameCtrl = TextEditingController();
   final shortNameCtrl = TextEditingController();
   final unpCtrl = TextEditingController();
+  final  codeFilialCtrl = TextEditingController();
   final legalAddressCtrl = TextEditingController();
   final postalAddressCtrl = TextEditingController();
   final ibanCtrl = TextEditingController();
@@ -86,41 +88,70 @@ class _OrderScreenState extends State<OrderScreen> {
 
   Future<void> _submit() async {
     if (_formKey.currentState!.validate()) {
-      setState(() {
-        _isLoading = true;
-      });
       try {
         final order = PassportistOrder(
-          fullName: fullNameCtrl.text,
-          shortName: shortNameCtrl.text,
-          unp: unpCtrl.text,
-          legalAddress: legalAddressCtrl.text,
-          postalAddress: postalAddressCtrl.text,
-          iban: ibanCtrl.text,
-          bankName: bankNameCtrl.text,
+          fullName: fullNameCtrl.text,//*
+          shortName: shortNameCtrl.text,//*
+          unp: unpCtrl.text,//*
+          legalAddress: legalAddressCtrl.text,//*
+          postalAddress: postalAddressCtrl.text,//*
+          iban: ibanCtrl.text,//*
+          bankName: bankNameCtrl.text,//*
           bankAddress: bankAddressCtrl.text,
-          bic: bicCtrl.text,
-          phone: phoneCtrl.text,
-          accountantPhone: accountantPhoneCtrl.text,
-          email: emailCtrl.text,
-          accountantEmail: accountantEmailCtrl.text,
-          directorPosition: directorPositionCtrl.text,
-          directorName: directorNameCtrl.text,
-          directorAuthority: directorAuthorityCtrl.text,
+          bic: bicCtrl.text,//*
+          phone: phoneCtrl.text,//*
+          accountantPhone: accountantPhoneCtrl.text,//*
+          email: emailCtrl.text,//*
+          accountantEmail: accountantEmailCtrl.text,//*
+          directorPosition: directorPositionCtrl.text,//*
+          directorName: directorNameCtrl.text,//*
+          directorAuthority: directorAuthorityCtrl.text,//*
           contactPosition: contactPositionCtrl.text,
           contactName: contactNameCtrl.text,
           contactPhone: contactPhoneCtrl.text,
+          codeFilial: codeFilialCtrl.text,
         );
 
-        await FirebaseFirestore.instance
-            .collection('users')
-            .add(order.toMap());
+        final errors = validateRequiredFields(order);
+        if(errors.isNotEmpty){
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(errors.join('\n'))),
+          );
+          return;
+        }
 
-        if (!mounted) return;
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(
-            const SnackBar(content: Text('Заказ успешно отправлен!')));
+        setState(() {
+          _isLoading = true;
+        });
+        await  Future.delayed(const Duration(seconds: 2));
+        final querySnapshot = await FirebaseFirestore.instance.collection('users').where('email', isEqualTo: emailCtrl.text)
+            .limit(1)
+            .get();
+        if (querySnapshot.docs.isNotEmpty) {
+          if (!mounted) return;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Пользователь с таким email уже существует!'),
+              backgroundColor: Colors.redAccent,
+            ),
+          );
+          return;
+        }else{
+          await FirebaseFirestore.instance
+              .collection('users')
+              .add(order.toMap());
+          setState(() {
+            _isSuccess = true;
+          });
+          if (!mounted) return;
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(
+              const SnackBar(content: Text('Заказ успешно отправлен!')));
+          return;
+        }
+
+
       } on FirebaseException catch (e) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
@@ -139,7 +170,60 @@ class _OrderScreenState extends State<OrderScreen> {
     }
   }
 
-  Widget buildField(String hint, TextEditingController ctrl) {
+  List<String> validateRequiredFields(PassportistOrder order) {
+    final errors = <String>[];
+
+    if (order.fullName.trim().isEmpty) {
+      errors.add('Полное наименование обязательно для заполнения');
+    }
+    if (order.shortName.trim().isEmpty) {
+      errors.add('Краткое наименование обязательно для заполнения');
+    }
+    if (order.unp.trim().isEmpty) {
+      errors.add('УНП обязательно для заполнения');
+    }
+    if (order.legalAddress.trim().isEmpty) {
+      errors.add('Юридический адрес обязателен для заполнения');
+    }
+    if (order.postalAddress.trim().isEmpty) {
+      errors.add('Почтовый адрес обязателен для заполнения');
+    }
+    if (order.iban.trim().isEmpty) {
+      errors.add('Счет (IBAN) обязателен для заполнения');
+    }
+    if (order.bankName.trim().isEmpty) {
+      errors.add('Наименование банка обязательно для заполнения');
+    }
+    if (order.bic.trim().isEmpty) {
+      errors.add('Код банка (BIC) обязателен для заполнения');
+    }
+    if (order.phone.trim().isEmpty) {
+      errors.add('Контактный телефон обязателен для заполнения');
+    }
+    if (order.accountantPhone.trim().isEmpty) {
+      errors.add('Телефон бухгалтерии обязателен для заполнения');
+    }
+    if (order.email.trim().isEmpty) {
+      errors.add('Контактный e-mail обязателен для заполнения');
+    }
+    if (order.accountantEmail.trim().isEmpty) {
+      errors.add('E-mail бухгалтерии обязателен для заполнения');
+    }
+    if (order.directorPosition.trim().isEmpty) {
+      errors.add('Должность руководителя обязательна для заполнения');
+    }
+    if (order.directorName.trim().isEmpty) {
+      errors.add('ФИО руководителя обязательно для заполнения');
+    }
+    if (order.directorAuthority.trim().isEmpty) {
+      errors.add('Основание полномочий руководителя обязательно для заполнения');
+    }
+
+    return errors;
+  }
+
+
+  Widget buildField(String hint, TextEditingController ctrl,{bool isRequired = false}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: DTextArea(
@@ -150,21 +234,25 @@ class _OrderScreenState extends State<OrderScreen> {
         borderSideIdle: BorderSide.none,
         backgroundColor: context.color.onBackground.withAlpha(128),
         hintText: hint,
+        prefixIcon: isRequired? Text('  *',style: TextStyle(fontSize: context.isDesktop?18:15),):null,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: Constants.spacing,
         ),
         textStyle: context.text.bodySmall?.copyWith(
           fontWeight: FontWeight.w500,
+          fontSize: context.isDesktop?18:15,
           color: context.color.surface,
         ),
         hintStyle: context.text.bodySmall?.copyWith(
           fontWeight: FontWeight.w500,
+            fontSize: context.isDesktop?18:15,
           color: context.color.surface.withAlpha(128),
         ),
         borderSideActive: BorderSide(
           color: context.color.background.withAlpha(191),
         ),
         controller: ctrl,
+
       ),
     );
   }
@@ -187,7 +275,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 ),
               ),
               Builder(
-                builder: (context) {
+                builder: (cont) {
                   return Semantics(
                     label: 'Back to Flutter Landing Page',
                     link: true,
@@ -196,10 +284,15 @@ class _OrderScreenState extends State<OrderScreen> {
                       href: '/',
                       child: DButton.text(
                         margin: const EdgeInsets.all(Constants.spacing),
-                        onTap: () => Env.controller.onTap(
-                          context,
-                          id: Env.navigations.first.id,
-                        ),
+                        onTap: () {
+                          if(_isLoading){
+                            return;
+                          }
+                          Env.controller.onTap(
+                            cont,
+                            id: Env.navigations.first.id,
+                          );
+                        },
                         text: 'На главную страницу',
                         borderRadius: BorderRadius.circular(
                           Constants.spacing * 0.5,
@@ -218,7 +311,16 @@ class _OrderScreenState extends State<OrderScreen> {
             ],
           ),
           backgroundColor: Colors.transparent,
-          body: isDesktop
+          body: _isLoading? Center(
+            child: CircularProgressIndicator(color: context.color.background,),
+          ):_isSuccess?Builder(
+            builder: (context) {
+              return SuccessOrderWidget(onClose: () => Env.controller.onTap(
+                context,
+                id: Env.navigations.first.id,
+              ),);
+            }
+          ):isDesktop
               ? SingleChildScrollView(
             padding: const .symmetric(vertical:50,horizontal:50),
                   child: Row(
@@ -267,22 +369,23 @@ class _OrderScreenState extends State<OrderScreen> {
       key: _formKey,
       child: Column(
         children: [
-          buildField('Полное наименование', fullNameCtrl),
-          buildField('Краткое наименование', shortNameCtrl),
-          buildField('УНП', unpCtrl),
-          buildField('Юридический адрес', legalAddressCtrl),
-          buildField('Почтовый адрес', postalAddressCtrl),
-          buildField('Счет (IBAN)', ibanCtrl),
-          buildField('Наименование банка', bankNameCtrl),
+          buildField('Полное наименование', fullNameCtrl,isRequired: true),
+          buildField('Краткое наименование', shortNameCtrl,isRequired: true),
+          buildField('УНП', unpCtrl,isRequired: true),
+          buildField('Код филиала для ЭСЧФ', codeFilialCtrl),
+          buildField('Юридический адрес', legalAddressCtrl,isRequired: true),
+          buildField('Почтовый адрес', postalAddressCtrl,isRequired: true),
+          buildField('Счет (IBAN)', ibanCtrl,isRequired: true),
+          buildField('Наименование банка', bankNameCtrl,isRequired: true),
           buildField('Адрес банка', bankAddressCtrl),
-          buildField('Код банка (BIC)', bicCtrl),
-          buildField('Контактный телефон', phoneCtrl),
-          buildField('Телефон бухгалтерии', accountantPhoneCtrl),
-          buildField('Контактный e-mail', emailCtrl),
-          buildField('E-mail бухгалтерии', accountantEmailCtrl),
-          buildField('Должность руководителя', directorPositionCtrl),
-          buildField('ФИО руководителя', directorNameCtrl),
-          buildField('На основании чего действует', directorAuthorityCtrl),
+          buildField('Код банка (BIC)', bicCtrl,isRequired: true),
+          buildField('Контактный телефон', phoneCtrl,isRequired: true),
+          buildField('Телефон бухгалтерии', accountantPhoneCtrl,isRequired: true),
+          buildField('Контактный e-mail', emailCtrl,isRequired: true),
+          buildField('E-mail бухгалтерии', accountantEmailCtrl,isRequired: true),
+          buildField('Должность руководителя', directorPositionCtrl,isRequired: true),
+          buildField('ФИО руководителя (полностью)', directorNameCtrl,isRequired: true),
+          buildField('На основании чего действует', directorAuthorityCtrl,isRequired: true),
           buildField('Должность контактного лица', contactPositionCtrl),
           buildField('ФИО контактного лица', contactNameCtrl),
           buildField('Телефон контактного лица', contactPhoneCtrl),
@@ -385,3 +488,66 @@ class _OrderScreenState extends State<OrderScreen> {
     );
   }
 }
+
+
+
+class SuccessOrderWidget extends StatelessWidget {
+  final VoidCallback onClose;
+
+  const SuccessOrderWidget({super.key, required this.onClose});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        elevation: 8,
+        color: Colors.green.shade50,
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.check_circle,
+                color: Colors.green.shade600,
+                size: 64,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Заявка успешно отправлена!',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Colors.green.shade800,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Мы свяжемся с вами в ближайшее время.',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Colors.green.shade700,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: onClose,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green.shade600,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text('Закрыть'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+

@@ -3,6 +3,7 @@ class PassportistOrder {
   final String fullName;
   final String shortName;
   final String unp;
+  final String codeFilial;
   final String legalAddress;
   final String postalAddress;
   final String iban;
@@ -25,6 +26,7 @@ class PassportistOrder {
     required this.fullName,
     required this.shortName,
     required this.unp,
+    required this.codeFilial,
     required this.legalAddress,
     required this.postalAddress,
     required this.iban,
@@ -49,6 +51,7 @@ class PassportistOrder {
       'fullName': fullName,
       'shortName': shortName,
       'unp': unp,
+      'codeFilial': codeFilial,
       'legalAddress': legalAddress,
       'postalAddress': postalAddress,
       'iban': iban,
