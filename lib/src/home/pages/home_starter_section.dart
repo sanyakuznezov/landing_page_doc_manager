@@ -1,3 +1,5 @@
+
+
 part of '../home.dart';
 
 
@@ -7,8 +9,12 @@ class HomeStarter extends StatelessWidget {
     required this.id,
     required this.title,
     required this.subtitle,
+    this.version,
+    this.urlRelease,
   });
   final String id, title, subtitle;
+  final String? version;
+  final String? urlRelease;
 
 
 
@@ -60,6 +66,12 @@ class HomeStarter extends StatelessWidget {
                           context,
                           title: title,
                           subtitle: subtitle,
+                          version: version,
+                          onTap: () {
+                            if (urlRelease != null) {
+                              _downloadFile(urlRelease!); 
+                            }
+                          },
                         ),
                       ),
                     ),
@@ -111,6 +123,12 @@ class HomeStarter extends StatelessWidget {
                         context,
                         title: title,
                         subtitle: subtitle,
+                        version: version,
+                        onTap: () {
+                          if (urlRelease != null) {
+                            _downloadFile(urlRelease!);
+                          }
+                        },
                       ),
                     ),
                   ),
@@ -127,6 +145,8 @@ class HomeStarter extends StatelessWidget {
     BuildContext context, {
     required String title,
     required String subtitle,
+    String? version,
+    VoidCallback? onTap,
   }) {
     return [
       MergeSemantics(
@@ -165,45 +185,48 @@ class HomeStarter extends StatelessWidget {
         ),
       ),
       const SizedBox(height: Constants.spacing+20),
-      Container(
-        padding: const EdgeInsets.only(left: 20),
-        decoration: BoxDecoration(
-          color: context.color.onBackground.withOpacity(0.5),
-          borderRadius: BorderRadius.circular(Constants.spacing * 0.5),
-        ),
-        child: Row(
-          mainAxisAlignment: .start,
-          spacing: 20,
-          mainAxisSize: .min,
-          children: [
-            Seo.text(
-              text: subtitle,
-              style: TextTagStyle.p,
-              child: Text(
-                'Последняя версия для Windows',
-                semanticsLabel: subtitle,
-                style: context.text.bodyMedium?.copyWith(
-                    fontSize: 18
+      Visibility(
+        visible: version!.isNotEmpty,
+        child: Container(
+          padding: const EdgeInsets.only(left: 20),
+          decoration: BoxDecoration(
+            color: context.color.onBackground.withOpacity(0.5),
+            borderRadius: BorderRadius.circular(Constants.spacing * 0.5),
+          ),
+          child: Row(
+            mainAxisAlignment: .start,
+            spacing: 20,
+            mainAxisSize: .min,
+            children: [
+              Seo.text(
+                text: subtitle,
+                style: TextTagStyle.p,
+                child: Text(
+                  'Последняя версия для Windows ${version ?? ''}',
+                  semanticsLabel: subtitle,
+                  style: context.text.bodyMedium?.copyWith(
+                      fontSize: 18
+                  ),
+                  textAlign: TextAlign.justify,
                 ),
-                textAlign: TextAlign.justify,
               ),
-            ),
-            DButton.text(
-              onTap: () => _downloadFile('https://document-manager-865ad.firebaseapp.com/updates/com.cdm-win-Setup.exe'),
-              text: 'СКАЧАТЬ',
-              padding: const EdgeInsets.symmetric(
-                horizontal: Constants.spacing,
-                vertical: Constants.spacing * 0.7,
+              DButton.text(
+                onTap: onTap!,
+                text: 'СКАЧАТЬ',
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Constants.spacing,
+                  vertical: Constants.spacing * 0.7,
+                ),
+                style: context.text.bodyMedium?.copyWith(
+                  color: context.color.primary,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12.0,
+                ),
+                borderRadius:
+                BorderRadius.circular(Constants.spacing * 0.25),
               ),
-              style: context.text.bodyMedium?.copyWith(
-                color: context.color.primary,
-                fontWeight: FontWeight.bold,
-                fontSize: 12.0,
-              ),
-              borderRadius:
-              BorderRadius.circular(Constants.spacing * 0.25),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       // Padding(
@@ -303,15 +326,17 @@ class HomeStarter extends StatelessWidget {
       child: Transform(
         transform: Matrix4.identity()
           ..rotateZ(3.14 * 0.15)
-          ..scale(1.25),
+          ..scale(0.7),
         alignment: Alignment.center,
         child: Semantics(
           label: 'Flutter Landing Page Thumbnail',
           image: true,
           child: Seo.image(
               alt: 'Flutter Landing Page Thumbnail',
-              src: '/assets/assets/image/thumbnail.png',
-              child: const DImage(source: 'assets/image/thumbnail.png')),
+              src: '/assets/assets/image/pass.png',
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: const DImage(source: 'assets/image/pass.png',fit: BoxFit.cover,))),
         ),
       ),
     );

@@ -86,7 +86,7 @@ class HomePricing extends StatelessWidget {
           ),
           child: Animate(
             autoPlay: false,
-            onInit: Env.controller.animate(id),
+            onInit: GRouter.controller.animate(id),
             effects: const [
               // Slide in animation effect
               SlideEffect(
@@ -145,7 +145,7 @@ class HomePricing extends StatelessWidget {
       builder: (context) {
         return Animate(
           autoPlay: false,
-          onInit: Env.controller.animate(DProvider.of(context)),
+          onInit: GRouter.controller.animate(DProvider.of(context)),
           effects: [
             // Slide in animation effect
             SlideEffect(

@@ -1,4 +1,4 @@
-part of '../env.dart';
+part of '../grouter.dart';
 
 class NavigationController extends ValueNotifier<String> {
   NavigationController(super.value) {
@@ -51,10 +51,10 @@ class NavigationController extends ValueNotifier<String> {
       // [2] Listen to ScrollToId event.
       scroll.addListener(() {
         // [3] Get position of this trigger.
-        int position = Env.navigations.indexWhere((e) => e.id == id).min(0);
+        int position = GRouter.navigations.indexWhere((e) => e.id == id).min(0);
 
         // [4] Get Scroll Position.
-        int index = Env.navigations
+        int index = GRouter.navigations
             .indexWhere((e) => e.id == instance.idPosition())
             .min(0);
 

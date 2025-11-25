@@ -1,4 +1,4 @@
-part of '../env.dart';
+part of '../grouter.dart';
 
 @model
 class CardModel extends DModel {

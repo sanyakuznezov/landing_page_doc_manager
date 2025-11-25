@@ -1,4 +1,4 @@
-part of '../env.dart';
+part of '../grouter.dart';
 
 class NavigationFooter extends StatelessWidget {
   const NavigationFooter({super.key});

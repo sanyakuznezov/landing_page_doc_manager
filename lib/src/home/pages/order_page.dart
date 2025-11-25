@@ -3,7 +3,7 @@ import 'package:dart_fusion/dart_fusion.dart';
 import 'package:flutter/material.dart';
 import 'package:seo/seo.dart';
 
-import '../../../env/env.dart';
+import '../../../env/grouter.dart';
 import '../models/passportist_order.dart';
 
 class OrderScreen extends StatefulWidget {
@@ -41,26 +41,29 @@ class _OrderScreenState extends State<OrderScreen> {
   final contactPhoneCtrl = TextEditingController();
 
   List<CardModel> _cards() {
-    return [
+    return const [
       CardModel(
         source: 'assets/image/icon_inactive_features.svg',
-        title: 'LKLKKLKKLKsad',
-        subtitle: 'LL:KLKasdasdasda',
+        title: 'Регулярные обновления',
+        subtitle: 'новые функции и улучшения без лишних хлопот.\n'
+            '👉 «Программа растёт вместе с вашими задачами!»',
       ),
       CardModel(
         source: 'assets/image/icon_inactive_features.svg',
-        title: 'LKLKKLKKLKsad',
-        subtitle: 'LL:KLKasdasdasda',
+        title: 'Безопасность данных',
+        subtitle: 'надёжная защита информации клиентов.\n'
+            '👉 «Данные граждан храняться на в вашем компьютере!»',
       ),
       CardModel(
         source: 'assets/image/icon_inactive_features.svg',
-        title: 'LKLKKLKKLKsad',
-        subtitle: 'LL:KLKasdasdasda',
+        title: 'Удобный интерфейс',
+        subtitle: 'простая работа даже для новичков.\n'
+            ' 👉 «Интерфейс, который понимает вас!»',
       ),
       CardModel(
         source: 'assets/image/icon_inactive_features.svg',
-        title: 'LKLKKLKKLKsad',
-        subtitle: 'LL:KLKasdasdasda',
+        title: 'В одном заказе, доступ для одного устройтва',
+        subtitle: 'После оформления догвора вы получаете ключ доступа, который действителен только для одного устройства',
       ),
     ];
   }
@@ -288,9 +291,9 @@ class _OrderScreenState extends State<OrderScreen> {
                           if(_isLoading){
                             return;
                           }
-                          Env.controller.onTap(
+                          GRouter.controller.onTap(
                             cont,
-                            id: Env.navigations.first.id,
+                            id: GRouter.navigations.first.id,
                           );
                         },
                         text: 'На главную страницу',
@@ -315,9 +318,9 @@ class _OrderScreenState extends State<OrderScreen> {
             child: CircularProgressIndicator(color: context.color.background,),
           ):_isSuccess?Builder(
             builder: (context) {
-              return SuccessOrderWidget(onClose: () => Env.controller.onTap(
+              return SuccessOrderWidget(onClose: () => GRouter.controller.onTap(
                 context,
-                id: Env.navigations.first.id,
+                id: GRouter.navigations.first.id,
               ),);
             }
           ):isDesktop
@@ -415,7 +418,6 @@ class _OrderScreenState extends State<OrderScreen> {
       builder: (context) {
         return Container(
           width: 300.0,
-          height: 250.0,
           padding: const EdgeInsets.all(Constants.spacing),
           decoration: BoxDecoration(
             color: context.color.surface,
@@ -458,9 +460,11 @@ class _OrderScreenState extends State<OrderScreen> {
                     style: TextTagStyle.h4,
                     child: Text(
                       item.title,
+                      textAlign: TextAlign.center,
                       semanticsLabel: item.title,
                       style: context.text.bodyMedium?.copyWith(
                         color: context.color.primary,
+                        fontSize: context.isDesktop?20:18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -477,6 +481,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     textAlign: TextAlign.justify,
                     style: context.text.bodySmall?.copyWith(
                       color: Colors.grey.shade700,
+                      fontSize: context.isDesktop?16:14,
                     ),
                   ),
                 ),

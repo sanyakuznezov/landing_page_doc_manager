@@ -1,19 +1,19 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:meta_seo/meta_seo.dart';
 import 'package:seo/seo.dart';
 import 'package:dart_fusion/dart_fusion.dart';
 import 'package:url_strategy/url_strategy.dart';
 
 import 'env/env.dart';
+import 'env/grouter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
    await Firebase.initializeApp(
-  options: const FirebaseOptions(
-      apiKey: '',
+  options:  FirebaseOptions(
+      apiKey: Env.keyFirebase,
       appId: "1:365023603331:web:bef9697af6f012053549b6",
       messagingSenderId: "365023603331",
       projectId: "document-manager-865ad",
@@ -27,7 +27,7 @@ void main() async {
           tree: WidgetTree(context: context),
           child: MaterialApp.router(
             title: 'Автоматизация, которая экономит ваше время!',
-            routerConfig: Env.routes,
+            routerConfig: GRouter.routes,
             theme: Constants.lightTheme,
             debugShowCheckedModeBanner: false,
             scrollBehavior: const DBehavior(),

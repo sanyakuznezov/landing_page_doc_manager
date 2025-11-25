@@ -31,7 +31,7 @@ class HomeFeatures extends StatelessWidget {
               crossAxisAlignment: WrapCrossAlignment.start,
               children: cards.to((index, item) => Animate(
                     autoPlay: false,
-                    onInit: Env.controller.animate(id),
+                    onInit: GRouter.controller.animate(id),
                     effects: [
                       SlideEffect(
                         begin: const Offset(0.0, -0.25),
@@ -78,7 +78,7 @@ class HomeFeatures extends StatelessWidget {
             Expanded(
               child: Animate(
                 autoPlay: false,
-                onInit: Env.controller.animate(id),
+                onInit: GRouter.controller.animate(id),
                 effects: const [
                   ScaleEffect(
                     begin: Offset(0.75, 0.75),
@@ -135,7 +135,7 @@ class HomeFeatures extends StatelessWidget {
           ),
           child: Animate(
             autoPlay: false,
-            onInit: Env.controller.animate(id),
+            onInit: GRouter.controller.animate(id),
             effects: const [
               SlideEffect(
                 begin: Offset(0.0, -0.25),
@@ -172,7 +172,7 @@ class HomeFeatures extends StatelessWidget {
                       '\n$subtitle',
                       semanticsLabel: subtitle,
                       style: context.text.bodySmall!.copyWith(
-                        fontSize: 20
+                        fontSize: context.isDesktop?20:18,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -191,7 +191,6 @@ class HomeFeatures extends StatelessWidget {
       builder: (context) {
         return Container(
           width: 300.0,
-          height: 250.0,
           padding: const EdgeInsets.all(Constants.spacing),
           decoration: BoxDecoration(
             color: context.color.surface,
@@ -234,9 +233,11 @@ class HomeFeatures extends StatelessWidget {
                     style: TextTagStyle.h4,
                     child: Text(
                       item.title,
+                      textAlign: TextAlign.center,
                       semanticsLabel: item.title,
                       style: context.text.bodyMedium?.copyWith(
                         color: context.color.primary,
+                       fontSize: context.isDesktop?20:18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -252,7 +253,8 @@ class HomeFeatures extends StatelessWidget {
                     semanticsLabel: item.subtitle,
                     textAlign: TextAlign.justify,
                     style: context.text.bodySmall
-                        ?.copyWith(color: Colors.grey.shade700),
+                        ?.copyWith(color: Colors.grey.shade700,
+                      fontSize: context.isDesktop?16:14,),
                   ),
                 ),
               ],

@@ -1,4 +1,4 @@
-part of '../env.dart';
+part of '../grouter.dart';
 
 class ErrorPage extends StatelessWidget {
   const ErrorPage({
@@ -112,9 +112,9 @@ class ErrorPage extends StatelessWidget {
                                   margin:
                                       const EdgeInsets.all(Constants.spacing),
                                   onTap: onTap ??
-                                      () => Env.controller.onTap(
+                                      () => GRouter.controller.onTap(
                                             context,
-                                            id: Env.navigations.first.id,
+                                            id: GRouter.navigations.first.id,
                                           ),
                                   text: 'Back to Home',
                                   borderRadius: BorderRadius.circular(

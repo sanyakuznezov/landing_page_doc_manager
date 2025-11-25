@@ -1,4 +1,4 @@
-part of '../env.dart';
+part of '../grouter.dart';
 
 class Background extends StatelessWidget {
   const Background({
@@ -58,7 +58,7 @@ class Background extends StatelessWidget {
   }) {
     return Background.builder(
         (_, __) => DChangeBuilder(
-              value: Env.controller.scroll,
+              value: GRouter.controller.scroll,
               builder: (context, value, child) {
                 double position = 0.0;
 

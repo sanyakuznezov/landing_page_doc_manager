@@ -87,7 +87,7 @@ class HomeFAQ extends StatelessWidget {
           ),
           child: Animate(
             autoPlay: false,
-            onInit: Env.controller.animate(id),
+            onInit: GRouter.controller.animate(id),
             effects: const [
               SlideEffect(
                 begin: Offset(0.0, -0.25),
@@ -144,7 +144,7 @@ class HomeFAQ extends StatelessWidget {
 
         return Animate(
           autoPlay: false,
-          onInit: Env.controller.animate(DProvider.of(context)),
+          onInit: GRouter.controller.animate(DProvider.of(context)),
           effects: [
             SlideEffect(
               begin: const Offset(0.0, -0.25),

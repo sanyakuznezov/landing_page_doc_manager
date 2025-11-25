@@ -1,4 +1,4 @@
-part of '../env.dart';
+part of '../grouter.dart';
 
 class NavigationDrawer extends Drawer {
   const NavigationDrawer.of(this.context, {super.key});
@@ -28,9 +28,9 @@ class NavigationDrawer extends Drawer {
         ),
         Expanded(
             child: ValueListenableBuilder(
-                valueListenable: Env.controller,
+                valueListenable: GRouter.controller,
                 builder: (context, value, _) => SingleChildScrollView(child:
-                        Column(children: Env.navigations.to((index, item) {
+                        Column(children: GRouter.navigations.to((index, item) {
                       final isSelected = value == item.id;
                       return Semantics(
                         label: item.name,
@@ -71,7 +71,7 @@ class NavigationDrawer extends Drawer {
                                   size: const Size.square(Constants.spacing),
                                 )),
                             onTap: () =>
-                                Env.controller.onTap(context, id: item.id),
+                                GRouter.controller.onTap(context, id: item.id),
                           ),
                         ),
                       );

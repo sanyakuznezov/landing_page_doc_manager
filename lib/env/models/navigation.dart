@@ -1,4 +1,4 @@
-part of '../env.dart';
+part of '../grouter.dart';
 
 class NavigationModel extends DModel {
   const NavigationModel({

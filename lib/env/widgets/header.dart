@@ -1,4 +1,4 @@
-part of '../env.dart';
+part of '../grouter.dart';
 
 class NavigationHeader extends AppBar {
   NavigationHeader({
@@ -17,7 +17,7 @@ class NavigationHeader extends AppBar {
         tag: '#Header',
         child: Builder(builder: (context) {
           return DChangeBuilder(
-            value: Env.controller.scroll,
+            value: GRouter.controller.scroll,
             builder: (context, value, child) {
               // Calculate the scroll progress
               double position() {
@@ -73,7 +73,7 @@ class NavigationHeader extends AppBar {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           // Display navigation buttons for desktop
-                          for (var navigation in Env.navigations)
+                          for (var navigation in GRouter.navigations)
                             Semantics(
                               label: navigation.name,
                               link: true,
@@ -86,7 +86,7 @@ class NavigationHeader extends AppBar {
                                   style: context.text.bodyMedium?.copyWith(
                                     color: context.color.background,
                                   ),
-                                  onTap: () => Env.controller.onTap(
+                                  onTap: () => GRouter.controller.onTap(
                                     context,
                                     id: navigation.id,
                                   ),

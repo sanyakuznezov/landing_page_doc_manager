@@ -1,44 +1,11 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dart_fusion/dart_fusion.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_landing_page/src/home/home.dart';
-import 'package:flutter_landing_page/src/home/pages/order_page.dart';
-import 'package:go_router/go_router.dart';
-import 'package:meta_seo/meta_seo.dart';
-import 'package:scroll_to_id/scroll_to_id.dart';
-import 'package:seo/seo.dart';
-import 'package:url_launcher/url_launcher.dart';
+// lib/env/grouter.dart
+import 'package:envied/envied.dart';
 
-part 'assets/routes.dart';
-part 'assets/constants.dart';
-part 'controllers/navigation.dart';
-part 'models/navigation.dart';
-part 'models/card.dart';
-part 'models/error.dart';
-part 'widgets/background.dart';
-part 'widgets/drawer.dart';
-part 'widgets/header.dart';
-part 'widgets/footer.dart';
-part 'widgets/error.dart';
+part 'env.g.dart';
 
-class Env {
-  static GoRouter routes = GoRouter(
-    routes: [Routes.home,Routes.order],
-    initialLocation: Routes.home.path,
-    errorBuilder: Routes.error.builder,
-  );
+@Envied(path: 'secret_key.env')
+abstract class Env {
+  @EnviedField(varName: 'FIREBASE_KEY',obfuscate: true)
+  static final String keyFirebase = _Env.keyFirebase;
 
-  static const List<NavigationModel> navigations = [
-    NavigationModel.starter,
-    NavigationModel.features,
-    NavigationModel.pricing,
-    //NavigationModel.faq
-  ];
-
-  static NavigationController controller = NavigationController(
-    navigations.first.id,
-  );
 }
