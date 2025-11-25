@@ -97,7 +97,7 @@ class NavigationFooter extends StatelessWidget {
               label: 'Copyright 2025 Александр Кузнецов',
               child: Seo.link(
                 anchor: '© 2025 Александр Кузнецов',
-                href: '',
+                href: 'https://raw.githubusercontent.com/sanyakuznezov/landing_page_doc_manager/refs/heads/main/LICENSE',
                 child: DButton.text(
                   mainAxisSize: MainAxisSize.min,
                   text: "© 2025 Александр Кузнецов",
@@ -109,12 +109,11 @@ class NavigationFooter extends StatelessWidget {
                   textAlign: TextAlign.center,
                   color: Colors.transparent,
                   onTap: () {
-                  //   launchUrl(
-                  //   Uri.parse(
-                  //     'https://github.com/Nialixus/'
-                  //     'flutter_landing_page/blob/main/LICENSE',
-                  //   ),
-                  // );
+                    launchUrl(
+                    Uri.parse(
+                      'https://raw.githubusercontent.com/sanyakuznezov/landing_page_doc_manager/refs/heads/main/LICENSE',
+                    ),
+                  );
                   }
                 ),
               ),
