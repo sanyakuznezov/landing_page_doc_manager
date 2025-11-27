@@ -68,7 +68,9 @@ class PassportistOrder {
       'contactPosition': contactPosition,
       'contactName': contactName,
       'contactPhone': contactPhone,
-      'deviceId':deviceId
+      'deviceId':deviceId,
+       'dateLastPayment':'', // отправляем пустую при оформлении
+        'isAccess':true
     };
   }
 }
