@@ -13,13 +13,13 @@
 .firebaserc
 firebase.json
 .firebase
+secret_key.env
 
 # Miscellaneous
 *.class
 *.log
 *.pyc
 *.swp
-*.env
 .DS_Store
 .atom/
 .buildlog/
