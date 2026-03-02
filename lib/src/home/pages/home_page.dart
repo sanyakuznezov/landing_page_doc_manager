@@ -112,12 +112,12 @@ class _HomePageState extends State<HomePage> {
             id: item.id,
             title: "Программное обеспечение для паспортистов. Документы оформляются сами — вы только управляете процессом!",
             subtitle:
-            "Программа для быстрого и удобного оформления регистрации и убытия по месту жительства и временного прибывния",
+            "Программа для быстрого и удобного оформления регистрации и убытия по месту жительства и временного пребывния",
             version: _version,
             urlRelease: _urlRelease,
           ),
 
-
+          const HorizontalInstallGuide(),
           // HomeFeatures Section: Key Features
           HomeFeatures(
             id: item.id,

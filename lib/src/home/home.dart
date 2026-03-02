@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dart_fusion/dart_fusion.dart';
 import 'package:flutter/material.dart' hide NavigationDrawer;
 import 'package:flutter_animate/flutter_animate.dart';
@@ -11,6 +13,7 @@ import 'dart:html' as html;
 
 import '../../env/grouter.dart';
 
+part 'pages/home_install_gide.dart';
 part 'pages/home_page.dart';
 part 'pages/home_faq_section.dart';
 part 'pages/home_features_section.dart';

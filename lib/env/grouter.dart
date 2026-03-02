@@ -33,9 +33,10 @@ class GRouter {
 
   static const List<NavigationModel> navigations = [
     NavigationModel.starter,
+    NavigationModel.guide,
     NavigationModel.features,
     NavigationModel.pricing,
-    //NavigationModel.faq
+
   ];
 
   static NavigationController controller = NavigationController(

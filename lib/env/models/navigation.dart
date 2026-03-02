@@ -31,10 +31,10 @@ class NavigationModel extends DModel {
     inactiveIcon: 'assets/image/icon_inactive_pricing.svg',
   );
 
-  // static const NavigationModel faq = NavigationModel(
-  //   id: 'faq',
-  //   name: 'FAQ',
-  //   activeIcon: 'assets/image/icon_active_faq.svg',
-  //   inactiveIcon: 'assets/image/icon_inactive_faq.svg',
-  // );
+  static const NavigationModel guide = NavigationModel(
+    id: 'guide',
+    name: 'Установка программы',
+    activeIcon: 'assets/image/icon_active_faq.svg',
+    inactiveIcon: 'assets/image/icon_inactive_faq.svg',
+  );
 }

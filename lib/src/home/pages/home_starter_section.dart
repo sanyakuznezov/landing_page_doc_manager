@@ -43,6 +43,7 @@ class HomeStarter extends StatelessWidget {
               padding: const EdgeInsets.all(Constants.spacing+100),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: .center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Expanded(
@@ -78,6 +79,7 @@ class HomeStarter extends StatelessWidget {
                   ),
                   const SizedBox(width: Constants.spacing),
                   Expanded(
+                    flex: 2,
                     child: HomeStarter.thumbnail(),
                   ),
                 ],
@@ -202,7 +204,7 @@ class HomeStarter extends StatelessWidget {
                 text: subtitle,
                 style: TextTagStyle.p,
                 child: Text(
-                  'Последняя версия для Windows ${version ?? ''}',
+                  'Последняя версия для Windows ${version}',
                   semanticsLabel: subtitle,
                   style: context.text.bodyMedium?.copyWith(
                       fontSize: 18
@@ -325,20 +327,200 @@ class HomeStarter extends StatelessWidget {
       ],
       child: Transform(
         transform: Matrix4.identity()
-          ..rotateZ(3.14 * 0.15)
+          //..rotateZ(3.14 * 0.15)
           ..scale(0.7),
         alignment: Alignment.center,
-        child: Semantics(
-          label: 'Flutter Landing Page Thumbnail',
-          image: true,
-          child: Seo.image(
-              alt: 'Flutter Landing Page Thumbnail',
-              src: '/assets/assets/image/pass.png',
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: const DImage(source: 'assets/image/pass.png',fit: BoxFit.cover,))),
-        ),
+        child: const AppPresentationSlider(screenshots: [
+          'assets/image/screenshots/scr1.png',
+          'assets/image/screenshots/scr2.png',
+          'assets/image/screenshots/scr3.png',
+          'assets/image/screenshots/scr4.png'
+        ])
+
+
+        // Semantics(
+        //   label: 'Flutter Landing Page Thumbnail',
+        //   image: true,
+        //   child: Seo.image(
+        //       alt: 'Flutter Landing Page Thumbnail',
+        //       src: '/assets/assets/image/pass.png',
+        //       child: ClipRRect(
+        //           borderRadius: BorderRadius.circular(20),
+        //           child: const DImage(source: 'assets/image/pass.png',fit: BoxFit.cover,))),
+        // ),
       ),
     );
   }
 }
+
+
+
+
+class AppPresentationSlider extends StatefulWidget {
+  final List<String> screenshots;
+  final bool autoPlay;
+
+  const AppPresentationSlider({
+    super.key,
+    required this.screenshots,
+    this.autoPlay = true,
+  });
+
+  @override
+  State<AppPresentationSlider> createState() => _AppPresentationSliderState();
+}
+
+class _AppPresentationSliderState extends State<AppPresentationSlider> {
+  late final PageController _pageController;
+  Timer? _timer;
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(viewportFraction: 0.85);
+    if (widget.autoPlay) _startTimer();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 4), (timer) {
+      if (_currentPage < widget.screenshots.length - 1) {
+        _animateToPage(_currentPage + 1);
+      } else {
+        _animateToPage(0); // Зацикливание
+      }
+    });
+  }
+
+  void _animateToPage(int page) {
+    _pageController.animateToPage(
+      page,
+      duration: const Duration(milliseconds: 600),
+      curve: Curves.easeInOutCubic,
+    );
+  }
+
+  void _handleManualNavigation(int direction) {
+    _timer?.cancel(); // Останавливаем автоплей при ручном вмешательстве
+    final targetPage = _currentPage + direction;
+    if (targetPage >= 0 && targetPage < widget.screenshots.length) {
+      _animateToPage(targetPage);
+    }
+    if (widget.autoPlay) _startTimer(); // Перезапуск таймера
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            // Основной слайдер
+            SizedBox(
+              height: 650,
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: widget.screenshots.length,
+                onPageChanged: (page) => setState(() => _currentPage = page),
+                itemBuilder: (context, index) => _buildImageCard(index, colors),
+              ),
+            ),
+
+            // Кнопка НАЗАД
+            Positioned(
+              left: 10,
+              child: _buildNavButton(
+                icon: Icons.chevron_left,
+                onPressed: _currentPage > 0 ? () => _handleManualNavigation(-1) : null,
+                colors: colors,
+              ),
+            ),
+
+            // Кнопка ВПЕРЕД
+            Positioned(
+              right: 10,
+              child: _buildNavButton(
+                icon: Icons.chevron_right,
+                onPressed: _currentPage < widget.screenshots.length - 1
+                    ? () => _handleManualNavigation(1)
+                    : null,
+                colors: colors,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 20),
+        _buildIndicators(colors),
+      ],
+    );
+  }
+
+  Widget _buildNavButton({required IconData icon, VoidCallback? onPressed, required ColorScheme colors}) {
+    return AnimatedOpacity(
+      duration: const Duration(milliseconds: 300),
+      opacity: onPressed == null ? 0.0 : 1.0, // Скрываем, если нельзя нажать
+      child: IconButton.filledTonal(
+        onPressed: onPressed,
+        icon: Icon(icon),
+        style: IconButton.styleFrom(
+          backgroundColor: colors.secondaryContainer.withOpacity(0.8),
+          foregroundColor: colors.onSecondaryContainer,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildImageCard(int index, ColorScheme colors) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      child: Card(
+        elevation: 4,
+        shadowColor: colors.shadow.withOpacity(0.2),
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        child: Image.network(
+          widget.screenshots[index],
+          fit: BoxFit.contain,
+          loadingBuilder: (context, child, loading) =>
+          loading == null ? child : const Center(child: CircularProgressIndicator()),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildIndicators(ColorScheme colors) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List.generate(widget.screenshots.length, (index) {
+        final active = _currentPage == index;
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          margin: const EdgeInsets.symmetric(horizontal: 4),
+          height: 8,
+          width: active ? 24 : 8,
+          decoration: BoxDecoration(
+            color: active ? colors.primary : colors.outlineVariant,
+            borderRadius: BorderRadius.circular(4),
+          ),
+        );
+      }),
+    );
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
+}
+
+
+
+
+
+
+
