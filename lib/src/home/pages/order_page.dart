@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:seo/seo.dart';
 
 import '../../../env/grouter.dart';
+import '../../../env/widgets/dialogs.dart';
 import '../models/passportist_order.dart';
 
 class OrderScreen extends StatefulWidget {
@@ -39,6 +40,8 @@ class _OrderScreenState extends State<OrderScreen> {
   final contactPositionCtrl = TextEditingController();
   final contactNameCtrl = TextEditingController();
   final contactPhoneCtrl = TextEditingController();
+  bool isAcceptedLicence = false;
+
 
   List<CardModel> _cards() {
     return const [
@@ -175,7 +178,9 @@ class _OrderScreenState extends State<OrderScreen> {
 
   List<String> validateRequiredFields(PassportistOrder order) {
     final errors = <String>[];
-
+    if(!isAcceptedLicence){
+      errors.add('ДЛЯ ПОДАЧИ ЗАЯВКИ НЕОБХОДИМО ПРИНЯТЬ ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ');
+    }
     if (order.fullName.trim().isEmpty) {
       errors.add('Полное наименование обязательно для заполнения');
     }
@@ -392,6 +397,9 @@ class _OrderScreenState extends State<OrderScreen> {
           buildField('Должность контактного лица', contactPositionCtrl),
           buildField('ФИО контактного лица', contactNameCtrl),
           buildField('Телефон контактного лица', contactPhoneCtrl),
+          LicenseAgreementPicker(onChanged: (agree){
+            isAcceptedLicence = agree;
+          },),
           const SizedBox(height: 20),
           _isLoading
               ? const CircularProgressIndicator()
@@ -550,6 +558,75 @@ class SuccessOrderWidget extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class LicenseAgreementPicker extends StatefulWidget {
+  final Function(bool) onChanged;
+
+  const LicenseAgreementPicker({super.key, required this.onChanged});
+
+  @override
+  State<LicenseAgreementPicker> createState() => _LicenseAgreementPickerState();
+}
+
+class _LicenseAgreementPickerState extends State<LicenseAgreementPicker> {
+  bool _isAccepted = false;
+
+  void _handleOpenLicense() {
+    // Вызываем созданный ранее метод диалога
+    Dialogs.showLicenseDialog(
+      context,
+      onAccepted: () {
+        setState(() {
+          _isAccepted = true;
+        });
+        widget.onChanged(true); // Передаем наверх, что всё ок
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: _handleOpenLicense, // Нажатие на всю область открывает диалог
+      borderRadius: BorderRadius.circular(8),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Чекбокс (только для визуализации, управляется через диалог)
+            Checkbox(
+              value: _isAccepted,
+              onChanged: (_) => _handleOpenLicense(),
+              activeColor: Colors.blueAccent,
+            ),
+            const SizedBox(width: 4),
+            // Текст-ссылка
+            Flexible(
+              child: RichText(
+                text: const TextSpan(
+                  style: TextStyle(color: Colors.black87, fontSize: 14),
+                  children: [
+                    TextSpan(text: 'Я принимаю условия ',style: TextStyle(color: Colors.white)),
+                    TextSpan(
+                      text: 'лицензионного соглашения',
+                      style: TextStyle(
+                        color: Colors.blueAccent,
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

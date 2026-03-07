@@ -200,16 +200,19 @@ class HomeStarter extends StatelessWidget {
             spacing: 20,
             mainAxisSize: .min,
             children: [
-              Seo.text(
-                text: subtitle,
-                style: TextTagStyle.p,
-                child: Text(
-                  'Последняя версия для Windows ${version}',
-                  semanticsLabel: subtitle,
-                  style: context.text.bodyMedium?.copyWith(
-                      fontSize: 18
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Seo.text(
+                  text: subtitle,
+                  style: TextTagStyle.p,
+                  child: Text(
+                    'Последняя версия\n для Windows ${version}',
+                    semanticsLabel: subtitle,
+                    style: context.text.bodyMedium?.copyWith(
+                        fontSize: 18
+                    ),
+                    textAlign: TextAlign.justify,
                   ),
-                  textAlign: TextAlign.justify,
                 ),
               ),
               DButton.text(

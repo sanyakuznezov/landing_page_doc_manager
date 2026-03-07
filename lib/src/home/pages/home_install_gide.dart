@@ -14,7 +14,8 @@ class _HorizontalInstallGuideState extends State<HorizontalInstallGuide> {
   final List<Map<String, dynamic>> _steps = [
     {
       "title": "Запуск файла",
-      "desc": "Запустите установщик. Появится синее окно защиты Windows.",
+      "desc": "Скачайте установочный файл через браузер CHROME (другие браузеры блокируют установку неподписанных файлов). "
+          "Запустите установщик. Появится синее окно защиты Windows.",
       "icon": Icons.file_open_outlined,
       "isWarning": false,
     },
@@ -44,62 +45,59 @@ class _HorizontalInstallGuideState extends State<HorizontalInstallGuide> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
 
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 200),
-      child: SizedBox(
-        width: 700,
-        height: 700,
-        child: Column(
-          crossAxisAlignment: .center,
-          children: [
-            // 1. Верхний индикатор прогресса (Stepper Header)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              child: Row(
-                children: List.generate(_steps.length, (index) => Expanded(
-                  child: Row(
-                    children: [
-                      _buildCircle(index, colors),
-                      if (index < _steps.length - 1)
-                        Expanded(child: Container(height: 2, color: index < _currentStep ? colors.primary : colors.surfaceContainerHighest)),
-                    ],
-                  ),
-                )),
-              ),
+    return SizedBox(
+      width: 700,
+      height: context.height - kToolbarHeight,
+      child: Column(
+        crossAxisAlignment: .center,
+        children: [
+          // 1. Верхний индикатор прогресса (Stepper Header)
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            child: Row(
+              children: List.generate(_steps.length, (index) => Expanded(
+                child: Row(
+                  children: [
+                    _buildCircle(index, colors),
+                    if (index < _steps.length - 1)
+                      Expanded(child: Container(height: 2, color: index < _currentStep ? colors.primary : colors.surfaceContainerHighest)),
+                  ],
+                ),
+              )),
             ),
+          ),
 
-            // 2. Основной контент (PageView)
-            Expanded(
-              child: PageView.builder(
-                controller: _pageController,
-                itemCount: _steps.length,
-                onPageChanged: (i) => setState(() => _currentStep = i),
-                itemBuilder: (context, index) => _buildStepCard(index, colors),
-              ),
+          // 2. Основной контент (PageView)
+          Expanded(
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: _steps.length,
+              onPageChanged: (i) => setState(() => _currentStep = i),
+              itemBuilder: (context, index) => _buildStepCard(index, colors),
             ),
+          ),
 
-            // 3. Нижние кнопки управления
-            Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: _currentStep > 0 ? () => _pageController.previousPage(duration: const Duration(milliseconds: 400), curve: Curves.easeInOut) : null,
-                    child:  Text("Назад",style: TextStyle(color: colors.surface),),
-                  ),
-                  FilledButton.icon(
-                    onPressed: _next,
-                    icon: Icon(_currentStep < _steps.length - 1 ? Icons.arrow_forward : Icons.done),
-                    label: Text(_currentStep < _steps.length - 1 ? "Далее" : "Понятно"),
-                    style: FilledButton.styleFrom(backgroundColor: colors.inverseSurface),
+          // 3. Нижние кнопки управления
+          Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: _currentStep > 0 ? () => _pageController.previousPage(duration: const Duration(milliseconds: 400), curve: Curves.easeInOut) : null,
+                  child:  Text("Назад",style: TextStyle(color: colors.surface),),
+                ),
+                FilledButton.icon(
+                  onPressed: _next,
+                  icon: Icon(_currentStep < _steps.length - 1 ? Icons.arrow_forward : Icons.done),
+                  label: Text(_currentStep < _steps.length - 1 ? "Далее" : "Понятно"),
+                  style: FilledButton.styleFrom(backgroundColor: colors.inverseSurface),
 
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -123,6 +121,7 @@ class _HorizontalInstallGuideState extends State<HorizontalInstallGuide> {
 
   Widget _buildStepCard(int index, ColorScheme colors) {
     final step = _steps[index];
+    final imgs = ['assets/image/img_guide/sc_1.png','assets/image/img_guide/sc_2.png','assets/image/img_guide/sc_3.png'];
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Column(
@@ -153,7 +152,7 @@ class _HorizontalInstallGuideState extends State<HorizontalInstallGuide> {
               clipBehavior: Clip.antiAlias,
               child: Stack(
                 children: [
-                  const Center(child: Icon(Icons.image, size: 64, color: Colors.grey)), // Заменить на Image.asset
+                   Center(child: Image.asset(imgs[index])), // Заменить на Image.asset
                   if (step['isWarning'])
                     Positioned(
                       top: 20, right: 20,

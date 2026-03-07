@@ -29,23 +29,25 @@ class NavigationFooter extends StatelessWidget {
                 alignment: WrapAlignment.center,
                 children: [
                   // Term of Service Button
-                  // Semantics(
-                  //   label: 'Unidentified Route',
-                  //   link: true,
-                  //   child: Seo.link(
-                  //     anchor: 'Term of Service',
-                  //     href: '/term_of_service.txt',
-                  //     child: DButton.text(
-                  //       onTap: () => context.go('/term_of_service.txt'),
-                  //       text: 'Term of Service',
-                  //       style: context.text.bodyMedium?.copyWith(
-                  //         fontWeight: FontWeight.bold,
-                  //         color: context.color.primary,
-                  //       ),
-                  //       color: Colors.transparent,
-                  //     ),
-                  //   ),
-                  // ),
+                  Semantics(
+                    label: 'Unidentified Route',
+                    link: true,
+                    child: Seo.link(
+                      anchor: 'Term of Service',
+                      href: '/term_of_service.txt',
+                      child: DButton.text(
+                        onTap: () {
+                          //context.go('/term_of_service.txt');
+                        },
+                        text: 'тел: +375336670030',
+                        style: context.text.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: context.color.primary,
+                        ),
+                        color: Colors.transparent,
+                      ),
+                    ),
+                  ),
 
                   // Privacy Pplicy Button
                   // Semantics(
@@ -72,12 +74,12 @@ class NavigationFooter extends StatelessWidget {
                     label: 'Author Email',
                     link: true,
                     child: Seo.link(
-                      anchor: 'Связаться с нами',
+                      anchor: 'Связаться с нами по email',
                       href: 'mailto:kuzniatsou.dev@gmail.com',
                       child: DButton.text(
                         onTap: () =>
                             launchUrl(Uri.parse('mailto:kuzniatsou.dev@gmail.com')),
-                        text: 'Связаться с нами',
+                        text: 'Связаться с нами по email',
                         style: context.text.bodyMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: context.color.primary,

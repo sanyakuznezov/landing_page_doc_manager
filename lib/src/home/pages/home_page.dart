@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
       });
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(_error!)),
+        SnackBar(content: Text(_error)),
       );
     } finally {
       setState(() {
@@ -192,68 +192,10 @@ class _HomePageState extends State<HomePage> {
                     "Регулярные обновления — новые функции и улучшения без лишних хлопот.",
                 type: HomePricingType.month,
               ),
-              // HomePricingModel(
-              //   title: 'Pro Plan',
-              //   price: 15,
-              //   benefits:
-              //       "Ideal for growing businesses looking for advanced features.\nEnhanced performance and scalability.\nPriority support and access to premium resources.",
-              //   type: HomePricingType.month,
-              // ),
-              // HomePricingModel(
-              //   title: 'Premium Plan',
-              //   price: 120,
-              //   benefits:
-              //       "Experience the ultimate package with exclusive features.\nAdvanced tools and customizations for your business.\nDedicated account manager for personalized assistance.",
-              //   type: HomePricingType.year,
-              // ),
+
             ],
           ),
 
-          // HomeFAQ Section: Frequently Asked Questions
-          HomeFAQ(
-            id: item.id,
-            title: 'Frequently Asked Questions',
-            subtitle: 'Answers to Common Inquiries Regarding Payment Options',
-            cards: const [
-              // CardModel items representing frequently asked questions
-              CardModel(
-                source: 'assets/image/icon_inactive_faq.svg',
-                title: "🚀 Discover the World's Wonders",
-                subtitle:
-                'Embark on a mesmerizing journey to breathtaking destinations and uncover the hidden gems that make our planet truly extraordinary.',
-              ),
-              CardModel(
-                source: 'assets/image/icon_inactive_features.svg',
-                title: '🎨 Unleash Your Creativity',
-                subtitle:
-                'Ignite your creative spark and let your imagination run wild with our vast collection of inspiring content, designed to fuel your artistic passions.',
-              ),
-              CardModel(
-                source: 'assets/image/icon_inactive_pricing.svg',
-                title: '🍰 Elevate Your Taste Buds',
-                subtitle:
-                'Indulge in a delectable culinary journey that tantalizes your palate, as we guide you through a world of flavors and culinary adventures.',
-              ),
-              CardModel(
-                source: 'assets/image/icon_inactive_faq.svg',
-                title: '🏸 Master Your Fitness Journey',
-                subtitle:
-                'Take control of your health and wellness goals with our expert guidance, tailored workouts, and nutrition tips to to help you achieve the best version of yourself.',
-              ),
-              CardModel(
-                source: 'assets/image/icon_inactive_features.svg',
-                title: '🏔 Unlock Adventure Awaits',
-                subtitle:
-                'Embark on thrilling adventures and create unforgettable moments as we guide you through an exciting world of experiences, from adrenaline-pumping escapades to serene getaways.',
-              ),
-              CardModel(
-                source: 'assets/image/icon_inactive_pricing.svg',
-                title: '🗞 Stay Informed and Inspired',
-                subtitle:
-                'Get the latest news, insights, and motivation from our team of experts and thought leaders. Stay informed, stay inspired, and stay ahead of the curve.',
-              ),
-            ],
-          ),
         ][index]);
   }
 
