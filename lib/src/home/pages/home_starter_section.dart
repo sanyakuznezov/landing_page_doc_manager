@@ -331,26 +331,15 @@ class HomeStarter extends StatelessWidget {
       child: Transform(
         transform: Matrix4.identity()
           //..rotateZ(3.14 * 0.15)
-          ..scale(0.7),
+          ..scale(0.8),
         alignment: Alignment.center,
         child: const AppPresentationSlider(screenshots: [
-          'assets/image/screenshots/scr1.png',
-          'assets/image/screenshots/scr2.png',
-          'assets/image/screenshots/scr3.png',
-          'assets/image/screenshots/scr4.png'
+          'assets/image/img_guide/scr1.webp',
+          'assets/image/img_guide/scr3.webp',
+          'assets/image/img_guide/scr2.webp',
+          'assets/image/img_guide/scr4.webp'
         ])
 
-
-        // Semantics(
-        //   label: 'Flutter Landing Page Thumbnail',
-        //   image: true,
-        //   child: Seo.image(
-        //       alt: 'Flutter Landing Page Thumbnail',
-        //       src: '/assets/assets/image/pass.png',
-        //       child: ClipRRect(
-        //           borderRadius: BorderRadius.circular(20),
-        //           child: const DImage(source: 'assets/image/pass.png',fit: BoxFit.cover,))),
-        // ),
       ),
     );
   }
@@ -424,7 +413,8 @@ class _AppPresentationSliderState extends State<AppPresentationSlider> {
             // Основной слайдер
             SizedBox(
               height: 650,
-              child: PageView.builder(
+              child:
+              PageView.builder(
                 controller: _pageController,
                 itemCount: widget.screenshots.length,
                 onPageChanged: (page) => setState(() => _currentPage = page),
@@ -484,11 +474,9 @@ class _AppPresentationSliderState extends State<AppPresentationSlider> {
         shadowColor: colors.shadow.withOpacity(0.2),
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-        child: Image.network(
+        child: Image.asset(
           widget.screenshots[index],
           fit: BoxFit.contain,
-          loadingBuilder: (context, child, loading) =>
-          loading == null ? child : const Center(child: CircularProgressIndicator()),
         ),
       ),
     );

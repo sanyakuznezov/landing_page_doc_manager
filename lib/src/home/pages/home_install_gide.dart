@@ -68,7 +68,8 @@ class _HorizontalInstallGuideState extends State<HorizontalInstallGuide> {
           ),
 
           // 2. Основной контент (PageView)
-          Expanded(
+          SizedBox(
+            height: 600,
             child: PageView.builder(
               controller: _pageController,
               itemCount: _steps.length,
@@ -146,13 +147,16 @@ class _HorizontalInstallGuideState extends State<HorizontalInstallGuide> {
               width: double.infinity,
               decoration: BoxDecoration(
                 color: colors.surfaceContainerLow,
+                image: DecorationImage(
+                  image: AssetImage(imgs[index]),
+                  fit: BoxFit.cover,
+                ),
                 borderRadius: BorderRadius.circular(24),
                 border: Border.all(color: step['isWarning'] ? Colors.orange.withOpacity(0.5) : colors.outlineVariant, width: 2),
               ),
               clipBehavior: Clip.antiAlias,
               child: Stack(
                 children: [
-                   Center(child: Image.asset(imgs[index])), // Заменить на Image.asset
                   if (step['isWarning'])
                     Positioned(
                       top: 20, right: 20,
