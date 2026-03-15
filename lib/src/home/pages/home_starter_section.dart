@@ -169,6 +169,54 @@ class HomeStarter extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
             ),
+            const SizedBox(height: Constants.spacing+40),
+            Visibility(
+              visible: version!.isNotEmpty,
+              child: Container(
+                padding: const EdgeInsets.only(left: 20),
+                decoration: BoxDecoration(
+                  color: context.color.onBackground.withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(Constants.spacing * 0.5),
+                ),
+                child: Row(
+                  mainAxisAlignment: .start,
+                  spacing: 20,
+                  mainAxisSize: .min,
+                  children: [
+                    DButton.text(
+                      onTap: onTap!,
+                      text: 'СКАЧАТЬ',
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Constants.spacing,
+                        vertical: Constants.spacing * 0.7,
+                      ),
+                      style: context.text.bodyMedium?.copyWith(
+                        color: context.color.primary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12.0,
+                      ),
+                      borderRadius:
+                      BorderRadius.circular(Constants.spacing * 0.25),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0).copyWith(right: 15),
+                      child: Seo.text(
+                        text: subtitle,
+                        style: TextTagStyle.p,
+                        child: Text(
+                          'Последняя версия\n для Windows ${version}',
+                          semanticsLabel: subtitle,
+                          style: context.text.bodyMedium?.copyWith(
+                              fontSize: 18
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
 
             // Display the subtitle
             Seo.text(
@@ -184,54 +232,6 @@ class HomeStarter extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-      const SizedBox(height: Constants.spacing+20),
-      Visibility(
-        visible: version!.isNotEmpty,
-        child: Container(
-          padding: const EdgeInsets.only(left: 20),
-          decoration: BoxDecoration(
-            color: context.color.onBackground.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(Constants.spacing * 0.5),
-          ),
-          child: Row(
-            mainAxisAlignment: .start,
-            spacing: 20,
-            mainAxisSize: .min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Seo.text(
-                  text: subtitle,
-                  style: TextTagStyle.p,
-                  child: Text(
-                    'Последняя версия\n для Windows ${version}',
-                    semanticsLabel: subtitle,
-                    style: context.text.bodyMedium?.copyWith(
-                        fontSize: 18
-                    ),
-                    textAlign: TextAlign.justify,
-                  ),
-                ),
-              ),
-              DButton.text(
-                onTap: onTap!,
-                text: 'СКАЧАТЬ',
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Constants.spacing,
-                  vertical: Constants.spacing * 0.7,
-                ),
-                style: context.text.bodyMedium?.copyWith(
-                  color: context.color.primary,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12.0,
-                ),
-                borderRadius:
-                BorderRadius.circular(Constants.spacing * 0.25),
-              ),
-            ],
-          ),
         ),
       ),
       // Padding(
@@ -476,7 +476,7 @@ class _AppPresentationSliderState extends State<AppPresentationSlider> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         child: Image.asset(
           widget.screenshots[index],
-          fit: BoxFit.contain,
+          fit: BoxFit.fitWidth,
         ),
       ),
     );

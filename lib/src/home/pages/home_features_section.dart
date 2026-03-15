@@ -14,41 +14,44 @@ class HomeFeatures extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (context.isDesktop) {
-      return Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          // Display label
-          HomeFeatures.introduction(id: id, title: title, subtitle: subtitle),
+      return Padding(
+        padding: const .only(top: 200),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            // Display label
+            HomeFeatures.introduction(id: id, title: title, subtitle: subtitle),
 
-          // Display card
-          Container(
-            padding: const EdgeInsets.all(Constants.spacing).copyWith(top: 0.0),
-            alignment: Alignment.center,
-            child: Wrap(
-              direction: Axis.horizontal,
-              spacing: Constants.spacing,
-              runSpacing: Constants.spacing,
-              crossAxisAlignment: WrapCrossAlignment.start,
-              children: cards.to((index, item) => Animate(
-                    autoPlay: false,
-                    onInit: GRouter.controller.animate(id),
-                    effects: [
-                      SlideEffect(
-                        begin: const Offset(0.0, -0.25),
-                        end: Offset.zero,
-                        delay: Constants.duration * (index + 1),
-                        duration: const Duration(milliseconds: 750),
-                      ),
-                      FadeEffect(
-                        delay: Constants.duration * (index + 1),
-                        duration: const Duration(milliseconds: 750),
-                      ),
-                    ],
-                    child: HomeFeatures.card(item: item),
-                  )),
+            // Display card
+            Container(
+              padding: const EdgeInsets.all(Constants.spacing).copyWith(top: 0.0),
+              alignment: Alignment.center,
+              child: Wrap(
+                direction: Axis.horizontal,
+                spacing: Constants.spacing,
+                runSpacing: Constants.spacing,
+                crossAxisAlignment: WrapCrossAlignment.start,
+                children: cards.to((index, item) => Animate(
+                      autoPlay: false,
+                      onInit: GRouter.controller.animate(id),
+                      effects: [
+                        SlideEffect(
+                          begin: const Offset(0.0, -0.25),
+                          end: Offset.zero,
+                          delay: Constants.duration * (index + 1),
+                          duration: const Duration(milliseconds: 750),
+                        ),
+                        FadeEffect(
+                          delay: Constants.duration * (index + 1),
+                          duration: const Duration(milliseconds: 750),
+                        ),
+                      ],
+                      child: HomeFeatures.card(item: item),
+                    )),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     } else {
       return Container(
