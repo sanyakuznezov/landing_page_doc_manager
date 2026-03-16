@@ -69,6 +69,7 @@ class PassportistOrder {
       'contactName': contactName,
       'contactPhone': contactPhone,
       'deviceId':deviceId,
+      'lastSession': '',
        'dateLastPayment':'', // отправляем пустую при оформлении
         'isAccess':true
     };
