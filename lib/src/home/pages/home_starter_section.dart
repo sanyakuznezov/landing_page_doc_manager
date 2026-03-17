@@ -33,7 +33,7 @@ class HomeStarter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: context.width,
-      height: context.height - (context.isDesktop ? 0.0 : kToolbarHeight),
+      height: context.height + (context.isDesktop ? 0.0 : kToolbarHeight+130),
       constraints: const BoxConstraints(minHeight: 600.0),
       child: Builder(
         builder: (context) {
