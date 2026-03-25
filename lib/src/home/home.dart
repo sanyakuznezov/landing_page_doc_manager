@@ -4,6 +4,7 @@ import 'package:dart_fusion/dart_fusion.dart';
 import 'package:flutter/material.dart' hide NavigationDrawer;
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:scroll_to_id/scroll_to_id.dart';

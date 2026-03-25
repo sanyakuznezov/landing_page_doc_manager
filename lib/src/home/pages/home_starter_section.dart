@@ -328,19 +328,12 @@ class HomeStarter extends StatelessWidget {
           duration: Duration(milliseconds: 750),
         ),
       ],
-      child: Transform(
-        transform: Matrix4.identity()
-          //..rotateZ(3.14 * 0.15)
-          ..scale(0.8),
-        alignment: Alignment.center,
-        child: const AppPresentationSlider(screenshots: [
-          'assets/image/img_guide/scr1.webp',
-          'assets/image/img_guide/scr3.webp',
-          'assets/image/img_guide/scr2.webp',
-          'assets/image/img_guide/scr4.webp'
-        ])
-
-      ),
+      child: const AppPresentationSlider(screenshots: [
+        'assets/image/img_guide/screen_1_1.png',
+        'assets/image/img_guide/screen_2.png',
+        'assets/image/img_guide/screen_3.png',
+        'assets/image/img_guide/screen_4.png'
+      ]),
     );
   }
 }
@@ -476,7 +469,9 @@ class _AppPresentationSliderState extends State<AppPresentationSlider> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         child: Image.asset(
           widget.screenshots[index],
-          fit: BoxFit.fitWidth,
+            isAntiAlias: true,
+          fit: BoxFit.contain,
+            filterQuality: FilterQuality.high
         ),
       ),
     );
