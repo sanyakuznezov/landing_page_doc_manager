@@ -33,12 +33,16 @@ class _HorizontalInstallGuideState extends State<HorizontalInstallGuide> {
     },
   ];
 
-  void _next() {
+  void _next() async {
     if (_currentStep < _steps.length - 1) {
       _pageController.nextPage(duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);
     }else if(_currentStep == _steps.length-1){
       _pageController.animateToPage(0,duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);
     }
+    await FirebaseAnalytics.instance.logEvent(
+      name: 'CLICK_BUTTON_GUIDE',
+      parameters: {'guide_step': 'active'},
+    );
   }
 
   @override

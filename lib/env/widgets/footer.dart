@@ -98,11 +98,11 @@ class NavigationFooter extends StatelessWidget {
             Semantics(
               label: 'Copyright 2025 Александр Кузнецов',
               child: Seo.link(
-                anchor: '© 2025 Александр Кузнецов',
+                anchor: '© 2026 Александр Кузнецов',
                 href: 'https://raw.githubusercontent.com/sanyakuznezov/landing_page_doc_manager/refs/heads/main/LICENSE',
                 child: DButton.text(
                   mainAxisSize: MainAxisSize.min,
-                  text: "© 2025 Александр Кузнецов",
+                  text: "© 2026 Александр Кузнецов",
                   style: context.text.bodyMedium?.copyWith(
                     color: context.color.background.withOpacity(0.25),
                     fontWeight: FontWeight.w400,

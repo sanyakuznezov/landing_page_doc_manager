@@ -14,46 +14,50 @@ class NavigationHeader extends AppBar {
 
   @override
   Widget? get flexibleSpace => Hero(
-        tag: '#Header',
-        child: Builder(builder: (context) {
-          return DChangeBuilder(
-            value: GRouter.controller.scroll,
-            builder: (context, value, child) {
-              // Calculate the scroll progress
-              double position() {
-                if (value.hasClients) return value.offset;
-                return 0.0;
-              }
+    tag: '#Header',
+    child: Builder(
+      builder: (context) {
+        return DChangeBuilder(
+          value: GRouter.controller.scroll,
+          builder: (context, value, child) {
+            // Calculate the scroll progress
+            double position() {
+              if (value.hasClients) return value.offset;
+              return 0.0;
+            }
 
-              double progress = position().max(kToolbarHeight) / kToolbarHeight;
+            double progress = position().max(kToolbarHeight) / kToolbarHeight;
 
-              return Theme(
-                data: context.theme.copyWith(
-                  textSelectionTheme: context.theme.textSelectionTheme.copyWith(
-                    selectionColor: selectionColor ??
-                        Color.lerp(
-                          context.color.onBackground,
-                          context.color.background,
-                          progress,
-                        )?.withOpacity(0.25),
-                  ),
+            return Theme(
+              data: context.theme.copyWith(
+                textSelectionTheme: context.theme.textSelectionTheme.copyWith(
+                  selectionColor:
+                      selectionColor ??
+                      Color.lerp(
+                        context.color.onBackground,
+                        context.color.background,
+                        progress,
+                      )?.withOpacity(0.25),
                 ),
-                child: Container(
-                  color: Color.lerp(
-                    context.color.primary.withOpacity(progress),
-                    context.color.onBackground,
-                    progress,
-                  ),
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.only(
-                    left: !context.isDesktop ? 0.0 : Constants.spacing,
-                    right: Constants.spacing,
-                  ),
-                  child: child,
+              ),
+              child: Container(
+                color: Color.lerp(
+                  context.color.primary.withOpacity(progress),
+                  context.color.onBackground,
+                  progress,
                 ),
-              );
-            },
-            child: Row(mainAxisSize: MainAxisSize.max, children: [
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(
+                  left: !context.isDesktop ? 0.0 : Constants.spacing,
+                  right: Constants.spacing,
+                ),
+                child: child,
+              ),
+            );
+          },
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
               if (!context.isDesktop)
                 Semantics(
                   label: 'Open Menu',
@@ -86,10 +90,18 @@ class NavigationHeader extends AppBar {
                                   style: context.text.bodyMedium?.copyWith(
                                     color: context.color.background,
                                   ),
-                                  onTap: () => GRouter.controller.onTap(
-                                    context,
-                                    id: navigation.id,
-                                  ),
+                                  onTap: () async {
+                                    GRouter.controller.onTap(
+                                      context,
+                                      id: navigation.id,
+                                    );
+                                    await FirebaseAnalytics.instance.logEvent(
+                                      name: 'CLICK_BUTTON_NAVIGATION',
+                                      parameters: {
+                                        'navigation': navigation.name,
+                                      },
+                                    );
+                                  },
                                 ),
                               ),
                             ),
@@ -108,37 +120,50 @@ class NavigationHeader extends AppBar {
                     child: DButton.text(
                       text: 'Подать заявку',
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
+                        horizontal: 16.0,
+                        vertical: 8.0,
+                      ),
                       borderRadius: BorderRadius.circular(20.0),
                       style: context.text.bodyMedium?.copyWith(
                         color: context.color.primary,
                         fontWeight: FontWeight.w600,
                       ),
-                      onTap: () => context.go('/order'),
+                      onTap: () async {
+                        context.go('/order');
+                        await FirebaseAnalytics.instance.logEvent(
+                          name: 'CLICK_BUTTON_ORDER',
+                          parameters: {'open_create_order': 'open'},
+                        );
+                      },
                     ),
                   ),
                 ),
-              )
-            ]),
-          );
-        }),
-      );
+              ),
+            ],
+          ),
+        );
+      },
+    ),
+  );
 
   static Widget logo() {
-    return Builder(builder: (context) {
-      return Seo.text(
-        text: 'ПаспортистSmart',
-        style: TextTagStyle.h1,
-        child: Text(
-          // Your logo
-          'ПаспортистSmart', semanticsLabel: 'Flutter Landing Page Logo',
-          style: context.text.titleLarge?.copyWith(
-            color: context.color.background,
-            fontWeight: FontWeight.w900,
-            fontSize: 20.0,
+    return Builder(
+      builder: (context) {
+        return Seo.text(
+          text: 'ПаспортистSmart',
+          style: TextTagStyle.h1,
+          child: Text(
+            // Your logo
+            'ПаспортистSmart',
+            semanticsLabel: 'Flutter Landing Page Logo',
+            style: context.text.titleLarge?.copyWith(
+              color: context.color.background,
+              fontWeight: FontWeight.w900,
+              fontSize: 20.0,
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }

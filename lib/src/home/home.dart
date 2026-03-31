@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dart_fusion/dart_fusion.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart' hide NavigationDrawer;
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

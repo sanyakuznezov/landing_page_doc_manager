@@ -68,10 +68,16 @@ class HomeStarter extends StatelessWidget {
                           title: title,
                           subtitle: subtitle,
                           version: version,
-                          onTap: () {
+                          onTap: () async {
                             if (urlRelease != null) {
                               _downloadFile(urlRelease!); 
                             }
+                            await FirebaseAnalytics.instance.logEvent(
+                              name: 'CLICK_BUTTON_DOWLOAD',
+                              parameters: {'button_id': 'download'},
+                            );
+
+
                           },
                         ),
                       ),
