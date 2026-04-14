@@ -88,6 +88,42 @@ class NavigationFooter extends StatelessWidget {
                       ),
                     ),
                   ),
+                  Semantics(
+                    label: 'Telegram',
+                    link: true,
+                    child: Seo.link(
+                      anchor: 'Telegram',
+                      href: 'https://t.me/+vVbn6w_w4ow0ODFi',
+                      child: DButton.text(
+                        onTap: () =>
+                            launchUrl(Uri.parse('https://t.me/+vVbn6w_w4ow0ODFi')),
+                        text: 'Telegram',
+                        style: context.text.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: context.color.primary,
+                        ),
+                        color: Colors.transparent,
+                      ),
+                    ),
+                  ),
+                  Semantics(
+                    label: 'Viber',
+                    link: true,
+                    child: Seo.link(
+                      anchor: 'Viber',
+                      href: 'viber://chat?number=%2B375295787315',
+                      child: DButton.text(
+                        onTap: () =>
+                            launchUrl(Uri.parse('viber://chat?number=%2B375295787315')),
+                        text: 'Viber',
+                        style: context.text.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: context.color.primary,
+                        ),
+                        color: Colors.transparent,
+                      ),
+                    ),
+                  )
 
 
                 ],
