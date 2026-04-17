@@ -184,48 +184,55 @@ class _OrderScreenState extends State<OrderScreen> {
     if (order.fullName.trim().isEmpty) {
       errors.add('Полное наименование обязательно для заполнения');
     }
-    if (order.shortName.trim().isEmpty) {
-      errors.add('Краткое наименование обязательно для заполнения');
-    }
-    if (order.unp.trim().isEmpty) {
-      errors.add('УНП обязательно для заполнения');
-    }
-    if (order.legalAddress.trim().isEmpty) {
-      errors.add('Юридический адрес обязателен для заполнения');
-    }
-    if (order.postalAddress.trim().isEmpty) {
-      errors.add('Почтовый адрес обязателен для заполнения');
-    }
-    if (order.iban.trim().isEmpty) {
-      errors.add('Счет (IBAN) обязателен для заполнения');
-    }
-    if (order.bankName.trim().isEmpty) {
-      errors.add('Наименование банка обязательно для заполнения');
-    }
-    if (order.bic.trim().isEmpty) {
-      errors.add('Код банка (BIC) обязателен для заполнения');
-    }
-    if (order.phone.trim().isEmpty) {
-      errors.add('Контактный телефон обязателен для заполнения');
-    }
-    if (order.accountantPhone.trim().isEmpty) {
-      errors.add('Телефон бухгалтерии обязателен для заполнения');
-    }
+    // if (order.shortName.trim().isEmpty) {
+    //   errors.add('Краткое наименование обязательно для заполнения');
+    // }
+    // if (order.unp.trim().isEmpty) {
+    //   errors.add('УНП обязательно для заполнения');
+    // }
+    // if (order.legalAddress.trim().isEmpty) {
+    //   errors.add('Юридический адрес обязателен для заполнения');
+    // }
+    // if (order.postalAddress.trim().isEmpty) {
+    //   errors.add('Почтовый адрес обязателен для заполнения');
+    // }
+    // if (order.iban.trim().isEmpty) {
+    //   errors.add('Счет (IBAN) обязателен для заполнения');
+    // }
+    // if (order.bankName.trim().isEmpty) {
+    //   errors.add('Наименование банка обязательно для заполнения');
+    // }
+    // if (order.bic.trim().isEmpty) {
+    //   errors.add('Код банка (BIC) обязателен для заполнения');
+    // }
+    // if (order.phone.trim().isEmpty) {
+    //   errors.add('Контактный телефон обязателен для заполнения');
+    // }
+    // if (order.accountantPhone.trim().isEmpty) {
+    //   errors.add('Телефон бухгалтерии обязателен для заполнения');
+    // }
     if (order.email.trim().isEmpty) {
       errors.add('Контактный e-mail обязателен для заполнения');
     }
-    if (order.accountantEmail.trim().isEmpty) {
-      errors.add('E-mail бухгалтерии обязателен для заполнения');
+    if (order.contactName.trim().isEmpty) {
+      errors.add('Контактный ФИО обязателен для заполнения');
     }
-    if (order.directorPosition.trim().isEmpty) {
-      errors.add('Должность руководителя обязательна для заполнения');
+
+    if (order.contactPhone.trim().isEmpty) {
+      errors.add('Контактный телефон обязателен для заполнения');
     }
-    if (order.directorName.trim().isEmpty) {
-      errors.add('ФИО руководителя обязательно для заполнения');
-    }
-    if (order.directorAuthority.trim().isEmpty) {
-      errors.add('Основание полномочий руководителя обязательно для заполнения');
-    }
+    // if (order.accountantEmail.trim().isEmpty) {
+    //   errors.add('E-mail бухгалтерии обязателен для заполнения');
+    // }
+    // if (order.directorPosition.trim().isEmpty) {
+    //   errors.add('Должность руководителя обязательна для заполнения');
+    // }
+    // if (order.directorName.trim().isEmpty) {
+    //   errors.add('ФИО руководителя обязательно для заполнения');
+    // }
+    // if (order.directorAuthority.trim().isEmpty) {
+    //   errors.add('Основание полномочий руководителя обязательно для заполнения');
+    // }
 
     return errors;
   }
@@ -377,24 +384,24 @@ class _OrderScreenState extends State<OrderScreen> {
       key: _formKey,
       child: Column(
         children: [
-          buildField('Полное наименование', fullNameCtrl,isRequired: true),
-          buildField('Краткое наименование', shortNameCtrl,isRequired: true),
-          buildField('УНП', unpCtrl,isRequired: true),
-          buildField('Код филиала для ЭСЧФ', codeFilialCtrl),
-          buildField('Юридический адрес', legalAddressCtrl,isRequired: true),
-          buildField('Почтовый адрес', postalAddressCtrl,isRequired: true),
-          buildField('Счет (IBAN)', ibanCtrl,isRequired: true),
-          buildField('Наименование банка', bankNameCtrl,isRequired: true),
-          buildField('Адрес банка', bankAddressCtrl),
-          buildField('Код банка (BIC)', bicCtrl,isRequired: true),
-          buildField('Контактный телефон', phoneCtrl,isRequired: true),
-          buildField('Телефон бухгалтерии', accountantPhoneCtrl,isRequired: true),
+          buildField('Полное наименование организации', fullNameCtrl,isRequired: true),
+          // buildField('Краткое наименование', shortNameCtrl,isRequired: true),
+          // buildField('УНП', unpCtrl,isRequired: true),
+          // buildField('Код филиала для ЭСЧФ', codeFilialCtrl),
+          // buildField('Юридический адрес', legalAddressCtrl,isRequired: true),
+          // buildField('Почтовый адрес', postalAddressCtrl,isRequired: true),
+          // buildField('Счет (IBAN)', ibanCtrl,isRequired: true),
+          // buildField('Наименование банка', bankNameCtrl,isRequired: true),
+          // buildField('Адрес банка', bankAddressCtrl),
+          // buildField('Код банка (BIC)', bicCtrl,isRequired: true),
+          //buildField('Контактный телефон', phoneCtrl,isRequired: true),
+          //buildField('Телефон бухгалтерии', accountantPhoneCtrl,isRequired: true),
           buildField('Контактный e-mail', emailCtrl,isRequired: true),
-          buildField('E-mail бухгалтерии', accountantEmailCtrl,isRequired: true),
-          buildField('Должность руководителя', directorPositionCtrl,isRequired: true),
-          buildField('ФИО руководителя (полностью)', directorNameCtrl,isRequired: true),
-          buildField('На основании чего действует', directorAuthorityCtrl,isRequired: true),
-          buildField('Должность контактного лица', contactPositionCtrl),
+          //buildField('E-mail бухгалтерии', accountantEmailCtrl,isRequired: true),
+          // buildField('Должность руководителя', directorPositionCtrl,isRequired: true),
+          // buildField('ФИО руководителя (полностью)', directorNameCtrl,isRequired: true),
+          // buildField('На основании чего действует', directorAuthorityCtrl,isRequired: true),
+          // buildField('Должность контактного лица', contactPositionCtrl),
           buildField('ФИО контактного лица', contactNameCtrl),
           buildField('Телефон контактного лица', contactPhoneCtrl),
           LicenseAgreementPicker(onChanged: (agree){
