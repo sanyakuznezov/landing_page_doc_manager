@@ -178,9 +178,9 @@ class _OrderScreenState extends State<OrderScreen> {
 
   List<String> validateRequiredFields(PassportistOrder order) {
     final errors = <String>[];
-    if(!isAcceptedLicence){
-      errors.add('ДЛЯ ПОДАЧИ ЗАЯВКИ НЕОБХОДИМО ПРИНЯТЬ ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ');
-    }
+    // if(!isAcceptedLicence){
+    //   errors.add('ДЛЯ ПОДАЧИ ЗАЯВКИ НЕОБХОДИМО ПРИНЯТЬ ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ');
+    // }
     if (order.fullName.trim().isEmpty) {
       errors.add('Полное наименование обязательно для заполнения');
     }
@@ -336,30 +336,32 @@ class _OrderScreenState extends State<OrderScreen> {
               ),);
             }
           ):isDesktop
-              ? SingleChildScrollView(
-            padding: const .symmetric(vertical:50,horizontal:50),
-                  child: Row(
-                    spacing: 50,
-                    crossAxisAlignment: .start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Wrap(
-                        direction: Axis.vertical,
-                        runSpacing: 20,
-                        spacing: 20,
-                        children: [
-                          ...List.generate(_cards().length, (index) {
-                            return _card(item: _cards()[index]);
-                          }),
-                        ],
-                      ),
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 600),
-                        child: _buildForm(),
-                      ),
-                    ],
+              ? Center(
+                child: SingleChildScrollView(
+                            padding: const .symmetric(vertical:50,horizontal:50),
+                    child: Column(
+                      spacing: 50,
+                      crossAxisAlignment: .center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 800),
+                          child: _buildForm(),
+                        ),
+                        Wrap(
+                          direction: Axis.horizontal,
+                          runSpacing: 20,
+                          spacing: 20,
+                          children: [
+                            ...List.generate(_cards().length, (index) {
+                              return _card(item: _cards()[index]);
+                            }),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                )
+              )
               : SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
@@ -404,9 +406,9 @@ class _OrderScreenState extends State<OrderScreen> {
           // buildField('Должность контактного лица', contactPositionCtrl),
           buildField('ФИО контактного лица', contactNameCtrl),
           buildField('Телефон контактного лица', contactPhoneCtrl),
-          LicenseAgreementPicker(onChanged: (agree){
-            isAcceptedLicence = agree;
-          },),
+          // LicenseAgreementPicker(onChanged: (agree){
+          //   isAcceptedLicence = agree;
+          // },),
           const SizedBox(height: 20),
           _isLoading
               ? const CircularProgressIndicator()

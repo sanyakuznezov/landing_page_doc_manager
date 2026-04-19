@@ -8,6 +8,8 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 
+
+
   static Widget floatingButton() {
     return ValueListenableBuilder(
       valueListenable: GRouter.controller,
@@ -117,7 +119,6 @@ class _HomePageState extends State<HomePage> {
             urlRelease: _urlRelease,
           ),
 
-          const HorizontalInstallGuide(),
           // HomeFeatures Section: Key Features
           HomeFeatures(
             id: item.id,
@@ -175,7 +176,7 @@ class _HomePageState extends State<HomePage> {
 
             ],
           ),
-
+          const HorizontalInstallGuide(),
           // HomePricing Section: Pricing Plans
           HomePricing(
             id: item.id,

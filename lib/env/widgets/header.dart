@@ -109,36 +109,36 @@ class NavigationHeader extends AppBar {
                       ),
                     )
                   : const Spacer(),
-              Theme(
-                data: context.theme,
-                child: Semantics(
-                  label: 'Go to dashboard',
-                  link: true,
-                  child: Seo.link(
-                    anchor: 'Get Started',
-                    href: '/order',
-                    child: DButton.text(
-                      text: 'Подать заявку',
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0,
-                        vertical: 8.0,
-                      ),
-                      borderRadius: BorderRadius.circular(20.0),
-                      style: context.text.bodyMedium?.copyWith(
-                        color: context.color.primary,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      onTap: () async {
-                        context.go('/order');
-                        await FirebaseAnalytics.instance.logEvent(
-                          name: 'CLICK_BUTTON_ORDER',
-                          parameters: {'open_create_order': 'open'},
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ),
+              // Theme(
+              //   data: context.theme,
+              //   child: Semantics(
+              //     label: 'Go to dashboard',
+              //     link: true,
+              //     child: Seo.link(
+              //       anchor: 'Get Started',
+              //       href: '/order',
+              //       child: DButton.text(
+              //         text: 'Подать заявку',
+              //         padding: const EdgeInsets.symmetric(
+              //           horizontal: 16.0,
+              //           vertical: 8.0,
+              //         ),
+              //         borderRadius: BorderRadius.circular(20.0),
+              //         style: context.text.bodyMedium?.copyWith(
+              //           color: context.color.primary,
+              //           fontWeight: FontWeight.w600,
+              //         ),
+              //         onTap: () async {
+              //           context.go('/order');
+              //           await FirebaseAnalytics.instance.logEvent(
+              //             name: 'CLICK_BUTTON_ORDER',
+              //             parameters: {'open_create_order': 'open'},
+              //           );
+              //         },
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         );

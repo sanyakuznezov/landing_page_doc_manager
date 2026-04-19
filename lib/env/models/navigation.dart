@@ -26,7 +26,7 @@ class NavigationModel extends DModel {
 
   static const NavigationModel pricing = NavigationModel(
     id: 'pricing',
-    name: 'Стоимость',
+    name: 'Стоимость', //Стоимость
     activeIcon: 'assets/image/icon_active_pricing.svg',
     inactiveIcon: 'assets/image/icon_inactive_pricing.svg',
   );

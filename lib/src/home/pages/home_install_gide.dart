@@ -49,9 +49,10 @@ class _HorizontalInstallGuideState extends State<HorizontalInstallGuide> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
 
-    return SizedBox(
+    return Container(
       width: 700,
-      //height: context.height - kToolbarHeight,
+      height: context.height + (context.isDesktop ? 0.0 : kToolbarHeight+130),
+      constraints: const BoxConstraints(minHeight: 600.0),
       child: Padding(
         padding: const EdgeInsets.only(top: 100),
         child: Column(

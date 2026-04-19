@@ -15,7 +15,7 @@ class HomeFeatures extends StatelessWidget {
   Widget build(BuildContext context) {
     if (context.isDesktop) {
       return Padding(
-        padding: const .only(top: 200),
+        padding: const .only(bottom: 200),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
