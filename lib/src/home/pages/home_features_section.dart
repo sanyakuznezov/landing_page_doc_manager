@@ -193,7 +193,7 @@ class HomeFeatures extends StatelessWidget {
     return Builder(
       builder: (context) {
         return Container(
-          width: 300.0,
+          width: context.width*0.25,
           padding: const EdgeInsets.all(Constants.spacing),
           decoration: BoxDecoration(
             color: context.color.surface,

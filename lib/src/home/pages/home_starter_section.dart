@@ -31,17 +31,20 @@ class HomeStarter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return
+      Container(
       width: context.width,
       height: context.height + (context.isDesktop ? 0.0 : kToolbarHeight+130),
-      constraints: const BoxConstraints(minHeight: 600.0),
-      child: Builder(
+      constraints:  BoxConstraints(minHeight: context.height),
+      child:
+      Builder(
         builder: (context) {
           if (context.isDesktop) {
             // For desktop layout
             return Padding(
               padding: const EdgeInsets.all(Constants.spacing+100),
               child: Row(
+                spacing: context.width*0.05,
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: .center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -83,7 +86,7 @@ class HomeStarter extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: Constants.spacing),
+
                   Expanded(
                     flex: 2,
                     child: HomeStarter.thumbnail(),
@@ -170,6 +173,7 @@ class HomeStarter extends StatelessWidget {
                 semanticsLabel: title,
                 style: context.text.titleLarge?.copyWith(
                   fontWeight: FontWeight.w900,
+                  fontSize: context.height*0.04,
                   height: 1.1,
                 ),
                 textAlign: TextAlign.left,
@@ -213,7 +217,7 @@ class HomeStarter extends StatelessWidget {
                           'Последняя версия\n для Windows ${version}',
                           semanticsLabel: subtitle,
                           style: context.text.bodyMedium?.copyWith(
-                              fontSize: 18
+                              fontSize: context.height*0.02,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -232,7 +236,7 @@ class HomeStarter extends StatelessWidget {
                 '\n$subtitle',
                 semanticsLabel: subtitle,
                 style: context.text.bodyMedium?.copyWith(
-                  fontSize: 20
+                  fontSize:  context.height*0.02
                 ),
                 textAlign: TextAlign.justify,
               ),
@@ -411,7 +415,7 @@ class _AppPresentationSliderState extends State<AppPresentationSlider> {
           children: [
             // Основной слайдер
             SizedBox(
-              height: 650,
+              height: context.height*0.6,
               child:
               PageView.builder(
                 controller: _pageController,

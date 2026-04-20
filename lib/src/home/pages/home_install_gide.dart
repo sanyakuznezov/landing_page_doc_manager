@@ -52,7 +52,7 @@ class _HorizontalInstallGuideState extends State<HorizontalInstallGuide> {
     return Container(
       width: 700,
       height: context.height + (context.isDesktop ? 0.0 : kToolbarHeight+130),
-      constraints: const BoxConstraints(minHeight: 600.0),
+      constraints:  BoxConstraints(minHeight: context.height),
       child: Padding(
         padding: const EdgeInsets.only(top: 100),
         child: Column(
@@ -78,7 +78,7 @@ class _HorizontalInstallGuideState extends State<HorizontalInstallGuide> {
 
             // 2. Основной контент (PageView)
             SizedBox(
-              height: 600,
+              height: context.height*0.6,
               child: PageView.builder(
                 controller: _pageController,
                 itemCount: _steps.length,
